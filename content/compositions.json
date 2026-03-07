@@ -1,0 +1,30 @@
+{
+  "items": [
+    {
+      "title_en": "Piano Piece No. 1",
+      "title_de": "Klavierstück Nr. 1",
+      "year": "2025",
+      "instrumentation_en": "for solo piano",
+      "instrumentation_de": "für Soloklavier",
+      "duration": "ca. 8'",
+      "desc_en": "",
+      "desc_de": "",
+      "audio": "",
+      "audio_label_en": "Excerpt",
+      "audio_label_de": "Ausschnitt"
+    },
+    {
+      "title_en": "String Quartet No. 1",
+      "title_de": "Streichquartett Nr. 1",
+      "year": "2024",
+      "instrumentation_en": "for string quartet",
+      "instrumentation_de": "für Streichquartett",
+      "duration": "ca. 14'",
+      "desc_en": "",
+      "desc_de": "",
+      "audio": "",
+      "audio_label_en": "I. Movement",
+      "audio_label_de": "I. Satz"
+    }
+  ]
+}

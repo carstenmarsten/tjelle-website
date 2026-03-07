@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "title_en": "Film Title",
+      "title_de": "Filmtitel",
+      "director": "Director Name",
+      "year": "2024",
+      "genre_en": "Short Film",
+      "genre_de": "Kurzfilm",
+      "vimeo": "",
+      "desc_en": "",
+      "desc_de": ""
+    }
+  ]
+}

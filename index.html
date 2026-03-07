@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Tjelle – Composer</title>
 <meta name="description" content="Tjelle is a composer creating music for film and contemporary concert works."/>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
@@ -234,6 +235,17 @@ button{border:none;background:none;cursor:pointer;font-family:inherit}
 }
 .snd-btn:hover{color:rgba(253,250,247,.65)}
 
+/* ── PARALLAX ───────────────────────────────────────────────────────────────── */
+/* Hero bg moves at 40% scroll speed — pure CSS via transform in JS */
+.h-bg{will-change:transform}
+.h-glow{will-change:transform}
+/* Tiles section: subtle upward drift on scroll */
+.tiles{will-change:transform}
+/* Disable parallax on reduced-motion */
+@media(prefers-reduced-motion:reduce){
+  .h-bg,.h-glow,.tiles{will-change:auto}
+}
+
 /* ── FEATURED TILES (Home) ──────────────────────────────────────────────────── */
 /* Like v1 grid but less dominant — smaller height, refined */
 #featured{padding:88px 0 80px}
@@ -406,7 +418,7 @@ button{border:none;background:none;cursor:pointer;font-family:inherit}
 
 /* ── ABOUT ───────────────────────────────────────────────────────────────────── */
 .about-grid{
-  display:grid;grid-template-columns:1.8fr 1fr;gap:72px;align-items:start;
+  display:grid;grid-template-columns:1fr 1.8fr;gap:72px;align-items:start;
   padding:52px var(--pad) 96px;max-width:1200px;margin:0 auto;
 }
 .about-bio{font-size:.98rem;line-height:1.9;color:var(--ink)}
@@ -516,6 +528,7 @@ footer{
 
   /* about */
   .about-grid{grid-template-columns:1fr;gap:36px;padding-top:36px}
+  /* On mobile portrait stays on top (natural order = correct) */
   .portrait{max-width:160px}
 
   /* contact */
@@ -585,7 +598,7 @@ footer{
     <div class="h-content">
       <h1 class="h-name">Tjelle</h1>
       <p class="h-role" data-en="Composer" data-de="Komponist">Composer</p>
-      <p class="h-stmt" data-en="Music between tension and transcendence." data-de="Musik zwischen Spannung und Transzendenz.">Music between tension and transcendence.</p>
+      <p class="h-stmt" id="hero-stmt" data-en="" data-de="">Music between tension and transcendence.</p>
     </div>
     <div class="h-scroll"><div class="h-scroll-line"></div><span data-en="scroll" data-de="scrollen">scroll</span></div>
     <button class="snd-btn" onclick="toggleSnd()">
@@ -645,8 +658,8 @@ footer{
   <section id="stmt" class="sr">
     <div class="eyebrow" data-en="About the work" data-de="Über die Arbeit">About the work</div>
     <div class="rule"></div>
-    <p class="stmt-txt" data-en="Tjelle is a composer working between film music and contemporary concert music. His work explores atmosphere, tension and transcendence." data-de="Tjelle ist ein Komponist zwischen Filmmusik und zeitgenössischer Konzertmusik. Seine Werke erkunden Atmosphäre, Spannung und Transzendenz.">Tjelle is a composer working between film music and contemporary concert music. His work explores atmosphere, tension and transcendence.</p>
-    <p class="stmt-sub" data-en="Based in [City]. Open to collaborations for film, theatre, concert and ensemble commissions." data-de="Wohnhaft in [Stadt]. Offen für Film, Theater, Konzert und Ensembleaufträge.">Based in [City]. Open to collaborations for film, theatre, concert and ensemble commissions.</p>
+    <p class="stmt-txt" id="stmt-txt-en" data-en="" data-de="">Tjelle is a composer working between film music and contemporary concert music. His work explores atmosphere, tension and transcendence.</p>
+    <p class="stmt-sub" id="stmt-sub-en" data-en="" data-de="">Based in [City]. Open to collaborations for film, theatre, concert and ensemble commissions.</p>
     <div class="rule"></div>
     <span class="btn btn-out" onclick="go('contact')" data-en="Get in touch" data-de="Kontakt aufnehmen">Get in touch</span>
   </section>
@@ -671,88 +684,8 @@ footer{
     <h1 class="pg-title" data-en="Compositions" data-de="Werke">Compositions</h1>
     <p class="pg-desc" data-en="A selection of works for solo instruments, chamber ensembles and orchestra." data-de="Eine Auswahl von Werken für Soloinstrumente, Kammerensemble und Orchester.">A selection of works for solo instruments, chamber ensembles and orchestra.</p>
   </div>
-  <div class="comp-wrap">
-
-    <div class="comp-item sr">
-      <div>
-        <div class="comp-n">01</div>
-        <h2 class="comp-title" data-en="Piano Piece No. 1" data-de="Klavierstück Nr. 1">Piano Piece No. 1</h2>
-        <div class="comp-meta"><span>2025</span><span data-en="for solo piano" data-de="für Soloklavier">for solo piano</span><span>ca. 8'</span></div>
-        <p class="comp-desc" data-en="[Short description — character, inspiration or premiere context. 1–3 sentences.]" data-de="[Kurze Beschreibung — Charakter, Inspiration oder Uraufführungskontext. 1–3 Sätze.]">[Short description — character, inspiration or premiere context. 1–3 sentences.]</p>
-      </div>
-      <div>
-        <div class="aplayer">
-          <div class="atrack" data-en="Excerpt · 2:34" data-de="Ausschnitt · 2:34">Excerpt · 2:34</div>
-          <div class="actrl">
-            <button class="pbtn" onclick="playToggle(this)"><span class="pi">▶</span></button>
-            <div class="abar-w"><div class="abar"><div class="afill"></div></div>
-            <div class="atimes"><span class="ct">0:00</span><span>2:34</span></div></div>
-          </div>
-          <div class="aph" data-en="Placeholder — replace with audio file" data-de="Platzhalter — durch Audiodatei ersetzen">Placeholder — replace with audio file</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="comp-item sr d1">
-      <div>
-        <div class="comp-n">02</div>
-        <h2 class="comp-title" data-en="String Quartet No. [X]" data-de="Streichquartett Nr. [X]">String Quartet No. [X]</h2>
-        <div class="comp-meta"><span>2024</span><span data-en="for string quartet" data-de="für Streichquartett">for string quartet</span><span>ca. 14'</span></div>
-        <p class="comp-desc" data-en="[Short description.]" data-de="[Kurze Beschreibung.]">[Short description.]</p>
-      </div>
-      <div>
-        <div class="aplayer">
-          <div class="atrack" data-en="I. [Movement] · 4:12" data-de="I. [Satz] · 4:12">I. [Movement] · 4:12</div>
-          <div class="actrl">
-            <button class="pbtn" onclick="playToggle(this)"><span class="pi">▶</span></button>
-            <div class="abar-w"><div class="abar"><div class="afill"></div></div>
-            <div class="atimes"><span class="ct">0:00</span><span>4:12</span></div></div>
-          </div>
-          <div class="aph" data-en="Placeholder" data-de="Platzhalter">Placeholder</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="comp-item sr">
-      <div>
-        <div class="comp-n">03</div>
-        <h2 class="comp-title" data-en="[Orchestral Work]" data-de="[Orchesterwerk]">[Orchestral Work]</h2>
-        <div class="comp-meta"><span>2023</span><span data-en="for orchestra" data-de="für Orchester">for orchestra</span><span>ca. 20'</span></div>
-        <p class="comp-desc" data-en="[Short description.]" data-de="[Kurze Beschreibung.]">[Short description.]</p>
-      </div>
-      <div>
-        <div class="aplayer">
-          <div class="atrack" data-en="Full work · 20:07" data-de="Gesamtwerk · 20:07">Full work · 20:07</div>
-          <div class="actrl">
-            <button class="pbtn" onclick="playToggle(this)"><span class="pi">▶</span></button>
-            <div class="abar-w"><div class="abar"><div class="afill"></div></div>
-            <div class="atimes"><span class="ct">0:00</span><span>20:07</span></div></div>
-          </div>
-          <div class="aph" data-en="Placeholder" data-de="Platzhalter">Placeholder</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="comp-item sr d1">
-      <div>
-        <div class="comp-n">04</div>
-        <h2 class="comp-title" data-en="[Chamber Work]" data-de="[Kammermusikwerk]">[Chamber Work]</h2>
-        <div class="comp-meta"><span>2022</span><span data-en="for flute and piano" data-de="für Flöte und Klavier">for flute and piano</span><span>ca. 11'</span></div>
-        <p class="comp-desc" data-en="[Short description.]" data-de="[Kurze Beschreibung.]">[Short description.]</p>
-      </div>
-      <div>
-        <div class="aplayer">
-          <div class="atrack" data-en="Complete · 11:22" data-de="Vollständig · 11:22">Complete · 11:22</div>
-          <div class="actrl">
-            <button class="pbtn" onclick="playToggle(this)"><span class="pi">▶</span></button>
-            <div class="abar-w"><div class="abar"><div class="afill"></div></div>
-            <div class="atimes"><span class="ct">0:00</span><span>11:22</span></div></div>
-          </div>
-          <div class="aph" data-en="Placeholder" data-de="Platzhalter">Placeholder</div>
-        </div>
-      </div>
-    </div>
-
+  <div class="comp-wrap" id="comp-list">
+    <!-- Loaded dynamically from content/compositions.json -->
   </div>
   <footer>
     <div class="foot-name">Tjelle</div>
@@ -772,63 +705,8 @@ footer{
     <h1 class="pg-title" data-en="Film." data-de="Film.">Film.</h1>
     <p class="pg-desc" data-en="Music for film, short film and documentary. Replace video placeholders with Vimeo embeds." data-de="Musik für Film, Kurzfilm und Dokumentarfilm. Video-Platzhalter durch Vimeo-Embeds ersetzen.">Music for film, short film and documentary.</p>
   </div>
-  <div class="film-wrap">
-
-    <div class="film-item sr">
-      <div class="film-embed">
-        <!-- Replace: <iframe src="https://player.vimeo.com/video/ID?dnt=1" width="100%" height="100%" frameborder="0" allowfullscreen></iframe> -->
-        <div class="film-embed-ph">
-          <div class="film-ph-play">▶</div>
-          <div class="film-ph-txt"><span data-en="Vimeo embed" data-de="Vimeo Embed">Vimeo embed</span><br><span data-en="replace with your film clip" data-de="durch Filmclip ersetzen">replace with your film clip</span></div>
-        </div>
-      </div>
-      <div>
-        <div class="film-num">01</div>
-        <h2 class="film-title" data-en="[Film Title]" data-de="[Filmtitel]">[Film Title]</h2>
-        <div class="film-meta">
-          <span data-en="Director" data-de="Regie">Director</span> [Name]<br>
-          <span data-en="Year" data-de="Jahr">Year</span> 2024 · Short Film
-        </div>
-        <p class="film-desc" data-en="[Brief description of the film or your work as composer. What was the tone, the challenge, the collaboration? 2–3 sentences.]" data-de="[Kurze Beschreibung des Films oder deiner Rolle als Komponist. 2–3 Sätze.]">[Brief description of the film or your work as composer. 2–3 sentences.]</p>
-      </div>
-    </div>
-
-    <div class="film-item sr d1">
-      <div class="film-embed">
-        <div class="film-embed-ph">
-          <div class="film-ph-play">▶</div>
-          <div class="film-ph-txt"><span data-en="Vimeo embed" data-de="Vimeo Embed">Vimeo embed</span><br><span data-en="replace with your film clip" data-de="durch Filmclip ersetzen">replace with your film clip</span></div>
-        </div>
-      </div>
-      <div>
-        <div class="film-num">02</div>
-        <h2 class="film-title" data-en="[Film Title]" data-de="[Filmtitel]">[Film Title]</h2>
-        <div class="film-meta">
-          <span data-en="Director" data-de="Regie">Director</span> [Name]<br>
-          <span data-en="Year" data-de="Jahr">Year</span> 2023 · Documentary
-        </div>
-        <p class="film-desc" data-en="[Brief description.]" data-de="[Kurze Beschreibung.]">[Brief description.]</p>
-      </div>
-    </div>
-
-    <div class="film-item sr">
-      <div class="film-embed">
-        <div class="film-embed-ph">
-          <div class="film-ph-play">▶</div>
-          <div class="film-ph-txt"><span data-en="Vimeo embed" data-de="Vimeo Embed">Vimeo embed</span><br><span data-en="replace with your film clip" data-de="durch Filmclip ersetzen">replace with your film clip</span></div>
-        </div>
-      </div>
-      <div>
-        <div class="film-num">03</div>
-        <h2 class="film-title" data-en="[Film Title]" data-de="[Filmtitel]">[Film Title]</h2>
-        <div class="film-meta">
-          <span data-en="Director" data-de="Regie">Director</span> [Name]<br>
-          <span data-en="Year" data-de="Jahr">Year</span> 2022 · Feature Film
-        </div>
-        <p class="film-desc" data-en="[Brief description.]" data-de="[Kurze Beschreibung.]">[Brief description.]</p>
-      </div>
-    </div>
-
+  <div class="film-wrap" id="film-list">
+    <!-- Loaded dynamically from content/films.json -->
   </div>
   <footer>
     <div class="foot-name">Tjelle</div>
@@ -848,7 +726,17 @@ footer{
     <h1 class="pg-title" data-en="About." data-de="Über.">About.</h1>
   </div>
   <div class="about-grid">
-    <div class="sr">
+    <div class="portrait-wrap sr">
+      <div class="portrait">
+        <!-- Replace with: <img src="portrait.jpg" alt="Tjelle" /> -->
+        <div class="portrait-ph">
+          <div class="portrait-ph-ico">☻</div>
+          <div class="portrait-ph-txt" data-en="Portrait photo" data-de="Portraitfoto">Portrait photo</div>
+        </div>
+      </div>
+      <p class="portrait-cap" data-en="Photo: [Photographer]" data-de="Foto: [Fotograf]">Photo: [Photographer]</p>
+    </div>
+    <div class="sr d1">
       <div class="about-bio">
         <p data-en="[Write your biography here. Introduce yourself — where you're from, what drives your work, what makes your compositional voice distinctive. Aim for 120–200 words, written in the third person.]" data-de="[Biografie hier. Woher du kommst, was deine Arbeit antreibt, was deine kompositorische Stimme ausmacht. Ca. 120–200 Wörter, dritte Person.]">[Write your biography here. Introduce yourself — where you're from, what drives your work, what makes your compositional voice distinctive. Aim for 120–200 words, written in the third person.]</p>
         <p data-en="[Continue the biography. Studies, significant works, collaborations, or artistic philosophy. Personal but professional — not a CV.]" data-de="[Studium, wichtige Werke, Zusammenarbeiten oder künstlerische Philosophie. Persönlich, kein Lebenslauf-Stil.]">[Continue. Studies, significant works, collaborations, or artistic philosophy.]</p>
@@ -861,16 +749,6 @@ footer{
         <span class="tag" data-en="[Add your own]" data-de="[Eigener Bereich]">[Add your own]</span>
       </div>
       <a href="#" class="cv-link" data-en="Download CV (PDF) ↓" data-de="Lebenslauf laden (PDF) ↓">Download CV (PDF) ↓</a>
-    </div>
-    <div class="portrait-wrap sr d2">
-      <div class="portrait">
-        <!-- Replace with: <img src="portrait.jpg" alt="Tjelle" /> -->
-        <div class="portrait-ph">
-          <div class="portrait-ph-ico">☻</div>
-          <div class="portrait-ph-txt" data-en="Portrait photo" data-de="Portraitfoto">Portrait photo</div>
-        </div>
-      </div>
-      <p class="portrait-cap" data-en="Photo: [Photographer]" data-de="Foto: [Fotograf]">Photo: [Photographer]</p>
     </div>
   </div>
   <footer>
@@ -940,8 +818,6 @@ function updateNav() {
   const onHero = cur === 'home' && window.scrollY < 60;
   nav.className = onHero ? 'over' : 'solid';
 }
-window.addEventListener('scroll', updateNav, {passive:true});
-
 function toggleTheme() {
   document.documentElement.dataset.theme =
     document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
@@ -1002,7 +878,222 @@ function initSR() {
   els.forEach(el => { if (!el.classList.contains('in')) obs.observe(el); });
 }
 
-document.addEventListener('DOMContentLoaded', () => { updateNav(); initSR(); });
+// ── CMS DATA LOADER ──────────────────────────────────────────────────────────
+// Fetches content JSON files and renders them into the page.
+// Falls back gracefully if files don't exist (e.g. local dev).
+
+async function loadCMS() {
+  try {
+    const [settingsRes, compsRes, filmsRes] = await Promise.all([
+      fetch('/content/settings.json'),
+      fetch('/content/compositions.json'),
+      fetch('/content/films.json')
+    ]);
+
+    if (settingsRes.ok) {
+      const s = await settingsRes.json();
+
+      // Hero statement
+      const heroStmt = document.getElementById('hero-stmt');
+      if (heroStmt) {
+        heroStmt.setAttribute('data-en', s.subtitle_en || '');
+        heroStmt.setAttribute('data-de', s.subtitle_de || '');
+        heroStmt.textContent = lang === 'de' ? s.subtitle_de : s.subtitle_en;
+      }
+
+      // Homepage statement
+      const stmtTxt = document.getElementById('stmt-txt-en');
+      if (stmtTxt) {
+        stmtTxt.setAttribute('data-en', s.statement_en || '');
+        stmtTxt.setAttribute('data-de', s.statement_de || '');
+        stmtTxt.textContent = lang === 'de' ? s.statement_de : s.statement_en;
+      }
+      const stmtSub = document.getElementById('stmt-sub-en');
+      if (stmtSub) {
+        stmtSub.setAttribute('data-en', s.based_en || '');
+        stmtSub.setAttribute('data-de', s.based_de || '');
+        stmtSub.textContent = lang === 'de' ? s.based_de : s.based_en;
+      }
+
+      // Contact email
+      const emailEl = document.querySelector('.c-email');
+      if (emailEl && s.email) {
+        emailEl.href = 'mailto:' + s.email;
+        emailEl.textContent = s.email;
+      }
+
+      // Social links
+      const socRows = document.querySelectorAll('.soc-row');
+      const socData = [
+        { name: 'Instagram', value: s.instagram ? '@' + s.instagram : '', url: s.instagram ? 'https://instagram.com/' + s.instagram : '#' },
+        { name: 'Vimeo',     value: s.vimeo_profile || '',                 url: s.vimeo_profile || '#' },
+        { name: 'SoundCloud',value: s.soundcloud || '',                    url: s.soundcloud || '#' }
+      ];
+      socRows.forEach((row, i) => {
+        if (socData[i]) {
+          const handle = row.querySelector('.soc-handle');
+          if (handle) handle.textContent = socData[i].value || '[not set]';
+        }
+      });
+
+      // Biography
+      const bioEls = document.querySelectorAll('.about-bio p');
+      if (bioEls.length >= 1 && s.bio_en) {
+        bioEls[0].setAttribute('data-en', s.bio_en);
+        bioEls[0].setAttribute('data-de', s.bio_de || s.bio_en);
+        bioEls[0].textContent = lang === 'de' ? (s.bio_de || s.bio_en) : s.bio_en;
+        if (bioEls[1]) bioEls[1].style.display = 'none'; // hide placeholder second paragraph
+      }
+
+      // Portrait
+      const portrait = document.querySelector('.portrait');
+      if (portrait && s.portrait) {
+        portrait.innerHTML = `<img src="${s.portrait}" alt="Tjelle" style="width:100%;height:100%;object-fit:cover;">`;
+      }
+      const portraitCap = document.querySelector('.portrait-cap');
+      if (portraitCap && s.portrait_credit) {
+        portraitCap.textContent = s.portrait_credit;
+      }
+
+      // CV link
+      const cvLink = document.querySelector('.cv-link');
+      if (cvLink && s.cv) {
+        cvLink.href = s.cv;
+      }
+    }
+
+    // ── COMPOSITIONS ──────────────────────────────────────────────────────────
+    if (compsRes.ok) {
+      const data = await compsRes.json();
+      const items = data.items || [];
+      const container = document.getElementById('comp-list');
+      if (container && items.length > 0) {
+        container.innerHTML = items.map((c, i) => `
+          <div class="comp-item sr${i % 2 === 1 ? ' d1' : ''}">
+            <div>
+              <div class="comp-n">${String(i + 1).padStart(2, '0')}</div>
+              <h2 class="comp-title" data-en="${c.title_en}" data-de="${c.title_de}">${lang === 'de' ? c.title_de : c.title_en}</h2>
+              <div class="comp-meta">
+                <span>${c.year}</span>
+                <span data-en="${c.instrumentation_en}" data-de="${c.instrumentation_de}">${lang === 'de' ? c.instrumentation_de : c.instrumentation_en}</span>
+                ${c.duration ? `<span>${c.duration}</span>` : ''}
+              </div>
+              ${(c.desc_en || c.desc_de) ? `<p class="comp-desc" data-en="${c.desc_en || ''}" data-de="${c.desc_de || ''}">${lang === 'de' ? (c.desc_de || c.desc_en) : (c.desc_en || c.desc_de)}</p>` : ''}
+            </div>
+            <div>
+              <div class="aplayer">
+                <div class="atrack" data-en="${c.audio_label_en || 'Audio'}" data-de="${c.audio_label_de || 'Audio'}">${lang === 'de' ? (c.audio_label_de || 'Audio') : (c.audio_label_en || 'Audio')}</div>
+                ${c.audio ? `
+                <div class="actrl">
+                  <button class="pbtn" onclick="playToggle(this)"><span class="pi">▶</span></button>
+                  <div class="abar-w">
+                    <div class="abar"><div class="afill"></div></div>
+                    <div class="atimes"><span class="ct">0:00</span><span>–:––</span></div>
+                  </div>
+                </div>
+                <audio class="real-audio" src="${c.audio}" preload="none"></audio>` : `
+                <div class="actrl">
+                  <button class="pbtn" onclick="playToggle(this)"><span class="pi">▶</span></button>
+                  <div class="abar-w">
+                    <div class="abar"><div class="afill"></div></div>
+                    <div class="atimes"><span class="ct">0:00</span><span>–:––</span></div>
+                  </div>
+                </div>
+                <div class="aph" data-en="No audio file yet" data-de="Noch keine Audiodatei">No audio file yet</div>`}
+              </div>
+            </div>
+          </div>
+        `).join('');
+        initSR();
+      }
+    }
+
+    // ── FILMS ─────────────────────────────────────────────────────────────────
+    if (filmsRes.ok) {
+      const data = await filmsRes.json();
+      const items = data.items || [];
+      const container = document.getElementById('film-list');
+      if (container && items.length > 0) {
+        container.innerHTML = items.map((f, i) => `
+          <div class="film-item sr${i % 2 === 1 ? ' d1' : ''}">
+            <div class="film-embed">
+              ${f.vimeo
+                ? `<iframe src="${f.vimeo}" width="100%" height="100%" frameborder="0" allowfullscreen style="position:absolute;inset:0;"></iframe>`
+                : `<div class="film-embed-ph">
+                    <div class="film-ph-play">▶</div>
+                    <div class="film-ph-txt">Vimeo embed<br>add URL in admin</div>
+                  </div>`
+              }
+            </div>
+            <div>
+              <div class="film-num">${String(i + 1).padStart(2, '0')}</div>
+              <h2 class="film-title" data-en="${f.title_en}" data-de="${f.title_de}">${lang === 'de' ? f.title_de : f.title_en}</h2>
+              <div class="film-meta">
+                <span data-en="Director" data-de="Regie">${lang === 'de' ? 'Regie' : 'Director'}</span> ${f.director}<br>
+                <span data-en="Year" data-de="Jahr">${lang === 'de' ? 'Jahr' : 'Year'}</span> ${f.year} · <span data-en="${f.genre_en}" data-de="${f.genre_de}">${lang === 'de' ? f.genre_de : f.genre_en}</span>
+              </div>
+              ${(f.desc_en || f.desc_de) ? `<p class="film-desc" data-en="${f.desc_en || ''}" data-de="${f.desc_de || ''}">${lang === 'de' ? (f.desc_de || f.desc_en) : (f.desc_en || f.desc_de)}</p>` : ''}
+            </div>
+          </div>
+        `).join('');
+        initSR();
+      }
+    }
+
+  } catch(e) {
+    console.log('CMS content not loaded (expected in local preview):', e.message);
+  }
+}
+
+// Netlify Identity redirect handling
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on('init', user => {
+    if (!user) {
+      window.netlifyIdentity.on('login', () => { document.location.href = '/admin/'; });
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateNav();
+  initSR();
+  loadCMS();
+});
+
+
+// ── PARALLAX ─────────────────────────────────────────────────────────────────
+// Only runs on home page, disabled if user prefers reduced motion
+const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function runParallax() {
+  if (noMotion || cur !== 'home') return;
+  const y = window.scrollY;
+
+  // Hero background: drifts up at 35% of scroll speed
+  const bg = document.querySelector('.h-bg');
+  if (bg) bg.style.transform = `translateY(${y * 0.35}px)`;
+
+  // Hero glow orb: drifts slightly faster for depth
+  const glow = document.querySelector('.h-glow');
+  if (glow) glow.style.transform = `translateY(${y * 0.2}px)`;
+
+  // Hero content: very subtle counter-drift (stays readable longer)
+  const content = document.querySelector('.h-content');
+  if (content) content.style.transform = `translateY(${y * -0.06}px)`;
+
+  // Featured tiles: drift up gently as you scroll into them
+  const tiles = document.querySelector('.tiles');
+  if (tiles) {
+    const rect = tiles.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight && rect.bottom > 0;
+    if (inView) {
+      const offset = (window.innerHeight - rect.top) * 0.04;
+      tiles.style.transform = `translateY(${-offset}px)`;
+    }
+  }
+}
+
+window.addEventListener('scroll', () => { updateNav(); runParallax(); }, {passive:true});
 </script>
 </body>
 </html>
