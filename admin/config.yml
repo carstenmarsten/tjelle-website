@@ -9,7 +9,9 @@ locale: "de"
 
 collections:
 
-  # ── COMPOSITIONS ────────────────────────────────────────────────────────────
+  # ════════════════════════════════════════════════════════
+  # COMPOSITIONS
+  # ════════════════════════════════════════════════════════
   - name: "compositions"
     label: "Compositions"
     label_singular: "Composition"
@@ -22,21 +24,23 @@ collections:
           - label: "Compositions"
             name: "items"
             widget: list
-            summary: "{{fields.title_en}} ({{fields.year}})"
+            summary: "{{fields.title_en}} — {{fields.year}}"
             fields:
               - { label: "Title (EN)", name: title_en, widget: string, hint: "e.g. Piano Piece No. 1" }
-              - { label: "Title (DE)", name: title_de, widget: string, hint: "z.B. Klavierstück Nr. 1" }
+              - { label: "Title (DE)", name: title_de, widget: string, hint: "z.B. Klavierstuck Nr. 1" }
               - { label: "Year", name: year, widget: string, hint: "e.g. 2025" }
               - { label: "Instrumentation (EN)", name: instrumentation_en, widget: string, hint: "e.g. for solo piano" }
-              - { label: "Instrumentation (DE)", name: instrumentation_de, widget: string, hint: "z.B. für Soloklavier" }
-              - { label: "Duration", name: duration, widget: string, hint: "e.g. ca. 8'" }
+              - { label: "Instrumentation (DE)", name: instrumentation_de, widget: string, hint: "z.B. fuer Soloklavier" }
+              - { label: "Duration", name: duration, widget: string, required: false, hint: "e.g. ca. 8'" }
               - { label: "Description (EN)", name: desc_en, widget: text, required: false }
               - { label: "Description (DE)", name: desc_de, widget: text, required: false }
-              - { label: "Audio file", name: audio, widget: file, required: false, hint: "Upload MP3 file" }
-              - { label: "Audio label (EN)", name: audio_label_en, widget: string, required: false, hint: "e.g. Excerpt · 2:34" }
-              - { label: "Audio label (DE)", name: audio_label_de, widget: string, required: false, hint: "z.B. Ausschnitt · 2:34" }
+              - { label: "Audio file (MP3)", name: audio, widget: file, required: false }
+              - { label: "Audio label (EN)", name: audio_label_en, widget: string, required: false, hint: "e.g. Excerpt 2:34" }
+              - { label: "Audio label (DE)", name: audio_label_de, widget: string, required: false, hint: "z.B. Ausschnitt 2:34" }
 
-  # ── FILM MUSIC ──────────────────────────────────────────────────────────────
+  # ════════════════════════════════════════════════════════
+  # FILM MUSIC
+  # ════════════════════════════════════════════════════════
   - name: "films"
     label: "Film Music"
     label_singular: "Film"
@@ -49,7 +53,7 @@ collections:
           - label: "Films"
             name: "items"
             widget: list
-            summary: "{{fields.title_en}} ({{fields.year}})"
+            summary: "{{fields.title_en}} — {{fields.year}}"
             fields:
               - { label: "Title (EN)", name: title_en, widget: string }
               - { label: "Title (DE)", name: title_de, widget: string }
@@ -57,31 +61,104 @@ collections:
               - { label: "Year", name: year, widget: string }
               - { label: "Genre (EN)", name: genre_en, widget: string, hint: "e.g. Short Film, Documentary, Feature Film" }
               - { label: "Genre (DE)", name: genre_de, widget: string, hint: "z.B. Kurzfilm, Dokumentarfilm, Spielfilm" }
-              - { label: "Vimeo Embed URL", name: vimeo, widget: string, required: false, hint: "e.g. https://player.vimeo.com/video/123456?dnt=1" }
+              - { label: "Vimeo Embed URL", name: vimeo, widget: string, required: false, hint: "https://player.vimeo.com/video/ID?dnt=1" }
               - { label: "Description (EN)", name: desc_en, widget: text, required: false }
               - { label: "Description (DE)", name: desc_de, widget: text, required: false }
 
-  # ── SITE SETTINGS ───────────────────────────────────────────────────────────
+  # ════════════════════════════════════════════════════════
+  # SITE SETTINGS
+  # ════════════════════════════════════════════════════════
   - name: "settings"
     label: "Site Settings"
     files:
-      - label: "Texts & Contact"
-        name: "general"
+
+      - label: "Home Page"
+        name: "home"
         file: "content/settings.json"
         format: json
         fields:
-          - { label: "Hero statement (EN)", name: subtitle_en, widget: string, hint: "Short poetic line on homepage, e.g. Music between tension and transcendence." }
+          - { label: "Artist name (nav + footer)", name: artist_name, widget: string, default: "Tjelle" }
+          - { label: "Hero statement (EN)", name: subtitle_en, widget: string, hint: "Short poetic line e.g. Music between tension and transcendence." }
           - { label: "Hero statement (DE)", name: subtitle_de, widget: string }
-          - { label: "Homepage statement (EN)", name: statement_en, widget: text, hint: "2-3 sentences below the works grid" }
-          - { label: "Homepage statement (DE)", name: statement_de, widget: text }
-          - { label: "Based in (EN)", name: based_en, widget: string, hint: "e.g. Based in Berlin." }
-          - { label: "Based in (DE)", name: based_de, widget: string }
-          - { label: "Biography (EN)", name: bio_en, widget: text }
-          - { label: "Biography (DE)", name: bio_de, widget: text }
-          - { label: "Email", name: email, widget: string }
-          - { label: "Instagram handle (without @)", name: instagram, widget: string, required: false }
-          - { label: "Vimeo profile URL", name: vimeo_profile, widget: string, required: false }
-          - { label: "SoundCloud profile URL", name: soundcloud, widget: string, required: false }
-          - { label: "Portrait photo", name: portrait, widget: image, required: false }
-          - { label: "Portrait photo credit", name: portrait_credit, widget: string, required: false, hint: "e.g. Photo: Max Mustermann" }
+          - { label: "Statement section text (EN)", name: statement_en, widget: text, hint: "2-3 sentences below the tiles" }
+          - { label: "Statement section text (DE)", name: statement_de, widget: text }
+          - { label: "Based in / open to (EN)", name: based_en, widget: string, hint: "e.g. Based in Berlin. Open to film, theatre and concert commissions." }
+          - { label: "Based in / open to (DE)", name: based_de, widget: string }
+          - widget: object
+            label: "Tile 1 (large left)"
+            name: tile1
+            fields:
+              - { label: "Category (EN)", name: cat_en, widget: string, default: "Film Score" }
+              - { label: "Category (DE)", name: cat_de, widget: string, default: "Filmmusik" }
+              - { label: "Title (EN)", name: title_en, widget: string, default: "[Film Title]" }
+              - { label: "Title (DE)", name: title_de, widget: string, default: "[Filmtitel]" }
+              - { label: "Year", name: year, widget: string, default: "2024" }
+              - { label: "Links to", name: link, widget: select, options: ["film","comps","about","contact"], default: "film" }
+              - { label: "Background image", name: image, widget: image, required: false }
+          - widget: object
+            label: "Tile 2 (top right)"
+            name: tile2
+            fields:
+              - { label: "Category (EN)", name: cat_en, widget: string, default: "Concert Music" }
+              - { label: "Category (DE)", name: cat_de, widget: string, default: "Konzertmusik" }
+              - { label: "Title (EN)", name: title_en, widget: string, default: "[Concert Work]" }
+              - { label: "Title (DE)", name: title_de, widget: string, default: "[Konzertwerk]" }
+              - { label: "Year", name: year, widget: string, default: "2025" }
+              - { label: "Links to", name: link, widget: select, options: ["film","comps","about","contact"], default: "comps" }
+              - { label: "Background image", name: image, widget: image, required: false }
+          - widget: object
+            label: "Tile 3 (bottom right)"
+            name: tile3
+            fields:
+              - { label: "Category (EN)", name: cat_en, widget: string, default: "Chamber Music" }
+              - { label: "Category (DE)", name: cat_de, widget: string, default: "Kammermusik" }
+              - { label: "Title (EN)", name: title_en, widget: string, default: "[Chamber Work]" }
+              - { label: "Title (DE)", name: title_de, widget: string, default: "[Kammerwerk]" }
+              - { label: "Year", name: year, widget: string, default: "2024" }
+              - { label: "Links to", name: link, widget: select, options: ["film","comps","about","contact"], default: "comps" }
+              - { label: "Background image", name: image, widget: image, required: false }
+
+      - label: "About Page"
+        name: "about"
+        file: "content/about.json"
+        format: json
+        fields:
+          - { label: "Biography paragraph 1 (EN)", name: bio1_en, widget: text, hint: "Introduction. ~80 words, third person." }
+          - { label: "Biography paragraph 1 (DE)", name: bio1_de, widget: text }
+          - { label: "Biography paragraph 2 (EN)", name: bio2_en, widget: text, required: false, hint: "Optional — studies, works, philosophy." }
+          - { label: "Biography paragraph 2 (DE)", name: bio2_de, widget: text, required: false }
+          - label: "Tags (areas of work)"
+            name: tags
+            widget: list
+            summary: "{{fields.en}}"
+            hint: "Up to 6 tags"
+            fields:
+              - { label: "Tag EN", name: en, widget: string }
+              - { label: "Tag DE", name: de, widget: string }
+          - { label: "Portrait photo", name: portrait, widget: image, required: false, hint: "Portrait JPG, max 500KB" }
+          - { label: "Portrait credit", name: portrait_credit, widget: string, required: false, hint: "e.g. Photo: Max Mustermann" }
           - { label: "CV PDF", name: cv, widget: file, required: false }
+
+      - label: "Contact Page"
+        name: "contact"
+        file: "content/contact.json"
+        format: json
+        fields:
+          - { label: "Intro text (EN)", name: intro_en, widget: text }
+          - { label: "Intro text (DE)", name: intro_de, widget: text }
+          - { label: "Email address", name: email, widget: string }
+          - { label: "Instagram handle (without @)", name: instagram, widget: string, required: false }
+          - { label: "Vimeo profile URL", name: vimeo, widget: string, required: false }
+          - { label: "SoundCloud profile URL", name: soundcloud, widget: string, required: false }
+
+      - label: "Impressum"
+        name: "impressum"
+        file: "content/impressum.json"
+        format: json
+        fields:
+          - { label: "Full name", name: name, widget: string, hint: "Vollstaendiger Name" }
+          - { label: "Street + number", name: street, widget: string }
+          - { label: "Postcode + city", name: city, widget: string, hint: "e.g. 12345 Berlin" }
+          - { label: "Country", name: country, widget: string, default: "Deutschland" }
+          - { label: "Email", name: email, widget: string }
+          - { label: "Additional info (optional)", name: extra, widget: text, required: false, hint: "e.g. Umsatzsteuer-ID, Berufsbezeichnung" }

@@ -1,0 +1,15 @@
+{
+  "bio1_en": "[Write your biography here. Introduce yourself — where you're from, what drives your work, what makes your compositional voice distinctive. Aim for 80–120 words, written in the third person.]",
+  "bio1_de": "[Biografie hier. Woher du kommst, was deine Arbeit antreibt. Ca. 80–120 Woerter, dritte Person.]",
+  "bio2_en": "",
+  "bio2_de": "",
+  "tags": [
+    { "en": "Film Music",    "de": "Filmmusik" },
+    { "en": "Concert Music", "de": "Konzertmusik" },
+    { "en": "Chamber Music", "de": "Kammermusik" },
+    { "en": "Orchestra",     "de": "Orchester" }
+  ],
+  "portrait": "",
+  "portrait_credit": "",
+  "cv": ""
+}
