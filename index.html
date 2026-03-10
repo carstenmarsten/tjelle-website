@@ -45,7 +45,7 @@ html{scroll-behavior:smooth}
 body{
   background:var(--bg);color:var(--ink);
   font-family:var(--sans);font-weight:300;line-height:1.7;
-  overflow-x:hidden;
+  overflow-x:clip;
   transition:background .35s,color .35s;
 }
 a{color:inherit;text-decoration:none}
@@ -189,9 +189,16 @@ button{border:none;background:none;cursor:pointer;font-family:inherit}
 .mm-lb:hover,.mm-lb.on{color:var(--white)}
 
 /* ── PAGES ──────────────────────────────────────────────────────────────────── */
-.page{display:none;min-height:100vh}
-.page.active{display:block;animation:pgIn .5s var(--ease) both}
+.page{display:none;min-height:100vh;flex-direction:column}
+.page.active{display:flex;animation:pgIn .5s var(--ease) both}
 @keyframes pgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+/* push footer to bottom on pages with little content */
+#page-comps   > .comp-wrap,
+#page-film    > .film-wrap,
+#page-about   > .about-grid,
+#page-contact > .contact-wrap,
+#page-impressum > .legal-wrap,
+#page-privacy   > .legal-wrap{flex:1}
 
 /* ── SCROLL REVEAL ──────────────────────────────────────────────────────────── */
 .sr{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
@@ -1308,6 +1315,7 @@ function runParallax() {
 }
 
 window.addEventListener('scroll', () => { updateNav(); runParallax(); }, {passive:true});
+document.addEventListener('scroll', () => { updateNav(); runParallax(); }, {passive:true});
 </script>
 </body>
 </html>
