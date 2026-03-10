@@ -41,7 +41,7 @@
 
 /* ── RESET ──────────────────────────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;overflow-x:hidden}
+html{scroll-behavior:smooth}
 body{
   background:var(--bg);color:var(--ink);
   font-family:var(--sans);font-weight:300;line-height:1.7;
@@ -189,7 +189,8 @@ button{border:none;background:none;cursor:pointer;font-family:inherit}
 
 /* ── PAGES ──────────────────────────────────────────────────────────────────── */
 .page{
-  display:none;min-height:100vh;
+  display:none;
+  min-height:100vh;
   flex-direction:column;
 }
 .page.active{
@@ -197,15 +198,8 @@ button{border:none;background:none;cursor:pointer;font-family:inherit}
   animation:pgIn .5s var(--ease) both;
 }
 @keyframes pgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-/* Content area grows to push footer down */
-.page > .comp-wrap,
-.page > .film-wrap,
-.page > .about-grid,
-.page > .contact-wrap,
-.page > .legal-wrap,
-.page > #featured{flex:1}
-/* Home hero never grows — only featured section below it */
-#page-home > #hero{flex:0 0 auto}
+/* Footer always pushed to bottom via margin-top:auto */
+#site-footer{margin-top:auto}
 
 /* ── SCROLL REVEAL ──────────────────────────────────────────────────────────── */
 .sr{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
