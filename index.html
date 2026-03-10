@@ -198,8 +198,6 @@ button{border:none;background:none;cursor:pointer;font-family:inherit}
   animation:pgIn .5s var(--ease) both;
 }
 @keyframes pgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-/* Footer always pushed to bottom via margin-top:auto */
-#site-footer{margin-top:auto}
 
 /* ── SCROLL REVEAL ──────────────────────────────────────────────────────────── */
 .sr{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
@@ -747,7 +745,20 @@ footer{
     <p class="stmt-sub" id="stmt-sub-en" data-en="" data-de="">Based in [City]. Open to collaborations for film, theatre, concert and ensemble commissions.</p>
     <div class="rule"></div>
     <span class="btn btn-out" onclick="go('contact')" data-en="Get in touch" data-de="Kontakt aufnehmen">Get in touch</span>
-  </section></div>
+  </section>
+  <footer>
+    <div class="foot-name" onclick="go('home')" id="foot-name-home">Tjelle</div>
+    <div class="foot-links">
+      <span class="foot-link" onclick="go('home')"      data-en="Home"         data-de="Start">Home</span>
+      <span class="foot-link" onclick="go('comps')"     data-en="Compositions" data-de="Werke">Compositions</span>
+      <span class="foot-link" onclick="go('film')"      data-en="Film Music"   data-de="Filmmusik">Film Music</span>
+      <span class="foot-link" onclick="go('contact')"   data-en="Contact"      data-de="Kontakt">Contact</span>
+      <span class="foot-link" onclick="go('impressum')" data-en="Impressum"    data-de="Impressum">Impressum</span>
+      <span class="foot-link" onclick="go('privacy')"   data-en="Privacy"      data-de="Datenschutz">Privacy</span>
+    </div>
+    <div class="foot-copy">© Tjelle 2025</div>
+  </footer>
+</div>
 
 <!-- ══════════════════════════════════════ COMPOSITIONS ══════════════════════ -->
 <div id="page-comps" class="page">
@@ -758,7 +769,20 @@ footer{
   </div>
   <div class="comp-wrap" id="comp-list">
     <!-- Loaded dynamically from content/compositions.json -->
-  </div></div>
+  </div>
+  <footer>
+    <div class="foot-name" onclick="go('home')" id="foot-name-comps">Tjelle</div>
+    <div class="foot-links">
+      <span class="foot-link" onclick="go('home')"      data-en="Home"         data-de="Start">Home</span>
+      <span class="foot-link" onclick="go('comps')"     data-en="Compositions" data-de="Werke">Compositions</span>
+      <span class="foot-link" onclick="go('film')"      data-en="Film Music"   data-de="Filmmusik">Film Music</span>
+      <span class="foot-link" onclick="go('contact')"   data-en="Contact"      data-de="Kontakt">Contact</span>
+      <span class="foot-link" onclick="go('impressum')" data-en="Impressum"    data-de="Impressum">Impressum</span>
+      <span class="foot-link" onclick="go('privacy')"   data-en="Privacy"      data-de="Datenschutz">Privacy</span>
+    </div>
+    <div class="foot-copy">© Tjelle 2025</div>
+  </footer>
+</div>
 
 <!-- ══════════════════════════════════════ FILM MUSIC ════════════════════════ -->
 <div id="page-film" class="page">
@@ -769,7 +793,20 @@ footer{
   </div>
   <div class="film-wrap" id="film-list">
     <!-- Loaded dynamically from content/films.json -->
-  </div></div>
+  </div>
+  <footer>
+    <div class="foot-name" onclick="go('home')" id="foot-name-film">Tjelle</div>
+    <div class="foot-links">
+      <span class="foot-link" onclick="go('home')"      data-en="Home"         data-de="Start">Home</span>
+      <span class="foot-link" onclick="go('comps')"     data-en="Compositions" data-de="Werke">Compositions</span>
+      <span class="foot-link" onclick="go('film')"      data-en="Film Music"   data-de="Filmmusik">Film Music</span>
+      <span class="foot-link" onclick="go('contact')"   data-en="Contact"      data-de="Kontakt">Contact</span>
+      <span class="foot-link" onclick="go('impressum')" data-en="Impressum"    data-de="Impressum">Impressum</span>
+      <span class="foot-link" onclick="go('privacy')"   data-en="Privacy"      data-de="Datenschutz">Privacy</span>
+    </div>
+    <div class="foot-copy">© Tjelle 2025</div>
+  </footer>
+</div>
 
 <!-- ══════════════════════════════════════ ABOUT ═════════════════════════════ -->
 <div id="page-about" class="page">
@@ -798,7 +835,20 @@ footer{
       </div>
       <a href="#" class="cv-link" data-en="Download CV (PDF) ↓" data-de="Lebenslauf laden (PDF) ↓">Download CV (PDF) ↓</a>
     </div>
-  </div></div>
+  </div>
+  <footer>
+    <div class="foot-name" onclick="go('home')" id="foot-name-about">Tjelle</div>
+    <div class="foot-links">
+      <span class="foot-link" onclick="go('home')"      data-en="Home"         data-de="Start">Home</span>
+      <span class="foot-link" onclick="go('comps')"     data-en="Compositions" data-de="Werke">Compositions</span>
+      <span class="foot-link" onclick="go('film')"      data-en="Film Music"   data-de="Filmmusik">Film Music</span>
+      <span class="foot-link" onclick="go('contact')"   data-en="Contact"      data-de="Kontakt">Contact</span>
+      <span class="foot-link" onclick="go('impressum')" data-en="Impressum"    data-de="Impressum">Impressum</span>
+      <span class="foot-link" onclick="go('privacy')"   data-en="Privacy"      data-de="Datenschutz">Privacy</span>
+    </div>
+    <div class="foot-copy">© Tjelle 2025</div>
+  </footer>
+</div>
 
 <!-- ══════════════════════════════════════ CONTACT ═══════════════════════════ -->
 <div id="page-contact" class="page">
@@ -819,7 +869,20 @@ footer{
       <div class="soc-row"><span class="soc-name">Vimeo</span><span class="soc-handle">vimeo.com/[profile]</span><span class="soc-arr">↗</span></div>
       <div class="soc-row"><span class="soc-name">SoundCloud</span><span class="soc-handle">soundcloud.com/[profile]</span><span class="soc-arr">↗</span></div>
     </div>
-  </div></div>
+  </div>
+  <footer>
+    <div class="foot-name" onclick="go('home')" id="foot-name-contact">Tjelle</div>
+    <div class="foot-links">
+      <span class="foot-link" onclick="go('home')"      data-en="Home"         data-de="Start">Home</span>
+      <span class="foot-link" onclick="go('comps')"     data-en="Compositions" data-de="Werke">Compositions</span>
+      <span class="foot-link" onclick="go('film')"      data-en="Film Music"   data-de="Filmmusik">Film Music</span>
+      <span class="foot-link" onclick="go('contact')"   data-en="Contact"      data-de="Kontakt">Contact</span>
+      <span class="foot-link" onclick="go('impressum')" data-en="Impressum"    data-de="Impressum">Impressum</span>
+      <span class="foot-link" onclick="go('privacy')"   data-en="Privacy"      data-de="Datenschutz">Privacy</span>
+    </div>
+    <div class="foot-copy">© Tjelle 2025</div>
+  </footer>
+</div>
 
 <!-- ══════════════════════════════════════ JS ════════════════════════════════ -->
 <!-- ══════════════════════════════════════ IMPRESSUM ═════════════════════════ -->
@@ -849,7 +912,20 @@ footer{
     <p>Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte wird jedoch keine Gewähr übernommen.</p>
     <p>Als Diensteanbieter bin ich gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.</p>
     <p style="margin-top:32px;font-size:.75rem;color:var(--ink-3)" data-en="⚠ Placeholder — replace all [brackets] with your real information before publishing." data-de="⚠ Platzhalter — alle [Klammern] vor Veröffentlichung durch echte Angaben ersetzen.">⚠ Platzhalter — alle [Klammern] vor Veröffentlichung durch echte Angaben ersetzen.</p>
-  </div></div>
+  </div>
+  <footer>
+    <div class="foot-name" onclick="go('home')" id="foot-name-impressum">Tjelle</div>
+    <div class="foot-links">
+      <span class="foot-link" onclick="go('home')"      data-en="Home"         data-de="Start">Home</span>
+      <span class="foot-link" onclick="go('comps')"     data-en="Compositions" data-de="Werke">Compositions</span>
+      <span class="foot-link" onclick="go('film')"      data-en="Film Music"   data-de="Filmmusik">Film Music</span>
+      <span class="foot-link" onclick="go('contact')"   data-en="Contact"      data-de="Kontakt">Contact</span>
+      <span class="foot-link" onclick="go('impressum')" data-en="Impressum"    data-de="Impressum">Impressum</span>
+      <span class="foot-link" onclick="go('privacy')"   data-en="Privacy"      data-de="Datenschutz">Privacy</span>
+    </div>
+    <div class="foot-copy">© Tjelle 2025</div>
+  </footer>
+</div>
 
 <!-- ══════════════════════════════════════ DATENSCHUTZ ═══════════════════════ -->
 <div id="page-privacy" class="page">
@@ -882,21 +958,22 @@ footer{
     <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer personenbezogenen Daten sowie das Recht auf Datenübertragbarkeit. Anfragen richten Sie bitte an: <span class="legal-ph">[deine@email.de]</span></p>
 
     <p style="margin-top:32px;font-size:.75rem;color:var(--ink-3)">⚠ Platzhalter — alle [Klammern] vor Veröffentlichung durch echte Angaben ersetzen. Empfehlung: finales Dokument via <a href="https://www.e-recht24.de/muster-datenschutzerklaerung.html" target="_blank" style="color:var(--navy)">e-recht24.de</a> generieren.</p>
-  </div></div>
-
-<!-- ── SHARED FOOTER (injected into every page by JS) ────────────────────── -->
-<footer id="site-footer">
-  <div class="foot-name" onclick="go('home')">Tjelle</div>
-  <div class="foot-links">
-    <span class="foot-link" onclick="go('home')"       data-en="Home"         data-de="Start">Home</span>
-    <span class="foot-link" onclick="go('comps')"      data-en="Compositions" data-de="Werke">Compositions</span>
-    <span class="foot-link" onclick="go('film')"       data-en="Film Music"   data-de="Filmmusik">Film Music</span>
-    <span class="foot-link" onclick="go('contact')"    data-en="Contact"      data-de="Kontakt">Contact</span>
-    <span class="foot-link" onclick="go('impressum')"  data-en="Impressum"    data-de="Impressum">Impressum</span>
-    <span class="foot-link" onclick="go('privacy')"    data-en="Privacy"      data-de="Datenschutz">Privacy</span>
   </div>
-  <div class="foot-copy">© Tjelle 2025</div>
-</footer>
+  <footer>
+    <div class="foot-name" onclick="go('home')" id="foot-name-privacy">Tjelle</div>
+    <div class="foot-links">
+      <span class="foot-link" onclick="go('home')"      data-en="Home"         data-de="Start">Home</span>
+      <span class="foot-link" onclick="go('comps')"     data-en="Compositions" data-de="Werke">Compositions</span>
+      <span class="foot-link" onclick="go('film')"      data-en="Film Music"   data-de="Filmmusik">Film Music</span>
+      <span class="foot-link" onclick="go('contact')"   data-en="Contact"      data-de="Kontakt">Contact</span>
+      <span class="foot-link" onclick="go('impressum')" data-en="Impressum"    data-de="Impressum">Impressum</span>
+      <span class="foot-link" onclick="go('privacy')"   data-en="Privacy"      data-de="Datenschutz">Privacy</span>
+    </div>
+    <div class="foot-copy">© Tjelle 2025</div>
+  </footer>
+</div>
+
+<!-- Footer is included statically in each page below -->
 
 <script>
 let cur = 'home', lang = 'en';
@@ -915,7 +992,6 @@ function go(id, pushState = true) {
   document.querySelectorAll('.nl').forEach(l => l.classList.toggle('on', l.dataset.p === id));
   updateNav();
   setTimeout(initSR, 100);
-  el.appendChild(document.getElementById('site-footer'));
   if (pushState) history.pushState({page: id}, '', '#'+id);
 }
 
@@ -1057,7 +1133,6 @@ async function loadCMS() {
     if (sRes.ok) {
       const s = await sRes.json();
 
-      // Artist name everywhere
       if (s.artist_name) {
         document.querySelectorAll('.nav-logo, .foot-name').forEach(el => el.textContent = s.artist_name);
       }
@@ -1264,9 +1339,6 @@ if (window.netlifyIdentity) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Attach footer to initial page
-  document.getElementById('page-home').appendChild(document.getElementById('site-footer'));
-  // Handle direct URL with hash
   const hash = location.hash.replace('#','');
   if (hash && pages.includes(hash)) {
     go(hash, false);
