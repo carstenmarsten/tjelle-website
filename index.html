@@ -100,20 +100,25 @@ button{border:none;background:none;cursor:pointer;font-family:inherit}
 
 .nav-r{margin-left:auto;display:flex;align-items:center;gap:16px}
 
-/* theme toggle */
+/* theme toggle with sun/moon */
 .thm{
-  width:34px;height:18px;border-radius:9px;
+  width:42px;height:22px;border-radius:11px;
   background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.18);
   position:relative;cursor:pointer;flex-shrink:0;transition:background .3s,border-color .3s;
+  display:flex;align-items:center;padding:0 3px;justify-content:space-between;
 }
 #nav.solid .thm{background:var(--bg-2);border-color:var(--rule)}
 .thm-dot{
-  position:absolute;top:2px;left:2px;
-  width:12px;height:12px;border-radius:50%;
-  background:rgba(255,255,255,.75);transition:transform .3s var(--ease),background .3s;
+  position:absolute;top:3px;left:3px;
+  width:14px;height:14px;border-radius:50%;
+  background:rgba(255,255,255,.85);transition:transform .3s var(--ease),background .3s;
+  z-index:1;
 }
 #nav.solid .thm-dot{background:var(--ink-2)}
-[data-theme="dark"] .thm-dot{transform:translateX(16px)}
+[data-theme="dark"] .thm-dot{transform:translateX(20px)}
+.thm-ico{font-size:.6rem;line-height:1;z-index:0;pointer-events:none;user-select:none}
+.thm-ico-sun{margin-left:1px}
+.thm-ico-moon{margin-right:1px}
 
 .lang-tgl{display:flex;gap:2px}
 .lb{
@@ -270,11 +275,16 @@ button{border:none;background:none;cursor:pointer;font-family:inherit}
 }
 @keyframes hUp{to{opacity:1;transform:none}}
 .h-scroll{
-  position:absolute;bottom:26px;left:var(--pad);z-index:2;
-  display:flex;align-items:center;gap:10px;
-  color:rgba(255,255,255,.18);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:rgba(255,255,255,.18);font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;
 }
-.h-scroll-line{width:36px;height:1px;background:rgba(255,255,255,.15)}
+.h-scroll-line{
+  width:1px;height:36px;
+  background:linear-gradient(to bottom,transparent,rgba(255,255,255,.25));
+  animation:scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse{0%,100%{opacity:.4;transform:scaleY(.8)}50%{opacity:1;transform:scaleY(1)}}
 .snd-btn{
   position:absolute;bottom:68px;right:var(--pad);z-index:2;
   display:flex;align-items:center;gap:6px;
@@ -529,7 +539,8 @@ footer{
   display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px;
 }
 [data-theme="dark"] footer{background:#0A0A0A;border-top:1px solid #1C1C1C}
-.foot-name{font-family:var(--serif);font-size:.9rem;font-weight:300;letter-spacing:.1em;color:rgba(255,255,255,.3)}
+.foot-name{font-family:var(--serif);font-size:.9rem;font-weight:300;letter-spacing:.1em;color:rgba(255,255,255,.3);cursor:pointer;transition:color .3s}
+.foot-name:hover{color:rgba(255,255,255,.6)}
 .foot-links{display:flex;gap:24px;flex-wrap:wrap}
 .foot-link{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.18);cursor:pointer;transition:color .3s}
 .foot-link:hover{color:rgba(255,255,255,.5)}
@@ -624,7 +635,11 @@ footer{
     <span class="nl"     data-p="contact" onclick="go('contact')" data-en="Contact"      data-de="Kontakt">Contact</span>
   </div>
   <div class="nav-r">
-    <div class="thm" onclick="toggleTheme()" title="Toggle light/dark"><div class="thm-dot"></div></div>
+    <div class="thm" onclick="toggleTheme()" title="Toggle light/dark">
+      <span class="thm-ico thm-ico-sun">☀</span>
+      <div class="thm-dot"></div>
+      <span class="thm-ico thm-ico-moon">☽</span>
+    </div>
     <div class="lang-tgl">
       <span class="lb on" onclick="setLang('en')">EN</span>
       <span class="lb"    onclick="setLang('de')">DE</span>
@@ -724,20 +739,7 @@ footer{
     <p class="stmt-sub" id="stmt-sub-en" data-en="" data-de="">Based in [City]. Open to collaborations for film, theatre, concert and ensemble commissions.</p>
     <div class="rule"></div>
     <span class="btn btn-out" onclick="go('contact')" data-en="Get in touch" data-de="Kontakt aufnehmen">Get in touch</span>
-  </section>
-
-  <footer>
-    <div class="foot-name">Tjelle</div>
-    <div class="foot-links">
-      <span class="foot-link" onclick="go('comps')"   data-en="Compositions" data-de="Werke">Compositions</span>
-      <span class="foot-link" onclick="go('film')"    data-en="Film Music"   data-de="Filmmusik">Film Music</span>
-      <span class="foot-link" onclick="go('contact')" data-en="Contact"      data-de="Kontakt">Contact</span>
-      <span class="foot-link" onclick="go('impressum')" data-en="Impressum" data-de="Impressum">Impressum</span>
-      <span class="foot-link" onclick="go('privacy')" data-en="Privacy" data-de="Datenschutz">Privacy</span>
-    </div>
-    <div class="foot-copy">© Tjelle 2025</div>
-  </footer>
-</div>
+  </section></div>
 
 <!-- ══════════════════════════════════════ COMPOSITIONS ══════════════════════ -->
 <div id="page-comps" class="page">
@@ -748,17 +750,7 @@ footer{
   </div>
   <div class="comp-wrap" id="comp-list">
     <!-- Loaded dynamically from content/compositions.json -->
-  </div>
-  <footer>
-    <div class="foot-name">Tjelle</div>
-    <div class="foot-links">
-      <span class="foot-link" onclick="go('home')"    data-en="Home"    data-de="Start">Home</span>
-      <span class="foot-link" onclick="go('contact')" data-en="Contact" data-de="Kontakt">Contact</span>
-      <span class="foot-link" onclick="go('impressum')" data-en="Impressum" data-de="Impressum">Impressum</span>
-    </div>
-    <div class="foot-copy">© Tjelle 2025</div>
-  </footer>
-</div>
+  </div></div>
 
 <!-- ══════════════════════════════════════ FILM MUSIC ════════════════════════ -->
 <div id="page-film" class="page">
@@ -769,17 +761,7 @@ footer{
   </div>
   <div class="film-wrap" id="film-list">
     <!-- Loaded dynamically from content/films.json -->
-  </div>
-  <footer>
-    <div class="foot-name">Tjelle</div>
-    <div class="foot-links">
-      <span class="foot-link" onclick="go('home')"    data-en="Home"    data-de="Start">Home</span>
-      <span class="foot-link" onclick="go('contact')" data-en="Contact" data-de="Kontakt">Contact</span>
-      <span class="foot-link" onclick="go('impressum')" data-en="Impressum" data-de="Impressum">Impressum</span>
-    </div>
-    <div class="foot-copy">© Tjelle 2025</div>
-  </footer>
-</div>
+  </div></div>
 
 <!-- ══════════════════════════════════════ ABOUT ═════════════════════════════ -->
 <div id="page-about" class="page">
@@ -803,26 +785,12 @@ footer{
         <p data-en="[Write your biography here. Introduce yourself — where you're from, what drives your work, what makes your compositional voice distinctive. Aim for 120–200 words, written in the third person.]" data-de="[Biografie hier. Woher du kommst, was deine Arbeit antreibt, was deine kompositorische Stimme ausmacht. Ca. 120–200 Wörter, dritte Person.]">[Write your biography here. Introduce yourself — where you're from, what drives your work, what makes your compositional voice distinctive. Aim for 120–200 words, written in the third person.]</p>
         <p data-en="[Continue the biography. Studies, significant works, collaborations, or artistic philosophy. Personal but professional — not a CV.]" data-de="[Studium, wichtige Werke, Zusammenarbeiten oder künstlerische Philosophie. Persönlich, kein Lebenslauf-Stil.]">[Continue. Studies, significant works, collaborations, or artistic philosophy.]</p>
       </div>
-      <div class="about-tags">
-        <span class="tag" data-en="Film Music"    data-de="Filmmusik">Film Music</span>
-        <span class="tag" data-en="Concert Music" data-de="Konzertmusik">Concert Music</span>
-        <span class="tag" data-en="Chamber Music" data-de="Kammermusik">Chamber Music</span>
-        <span class="tag" data-en="Orchestra"     data-de="Orchester">Orchestra</span>
-        <span class="tag" data-en="[Add your own]" data-de="[Eigener Bereich]">[Add your own]</span>
+      <div class="about-tags" style="display:none">
+        <!-- Filled from about.json tags via CMS — hidden until populated -->
       </div>
       <a href="#" class="cv-link" data-en="Download CV (PDF) ↓" data-de="Lebenslauf laden (PDF) ↓">Download CV (PDF) ↓</a>
     </div>
-  </div>
-  <footer>
-    <div class="foot-name">Tjelle</div>
-    <div class="foot-links">
-      <span class="foot-link" onclick="go('home')"    data-en="Home"    data-de="Start">Home</span>
-      <span class="foot-link" onclick="go('contact')" data-en="Contact" data-de="Kontakt">Contact</span>
-      <span class="foot-link" onclick="go('impressum')" data-en="Impressum" data-de="Impressum">Impressum</span>
-    </div>
-    <div class="foot-copy">© Tjelle 2025</div>
-  </footer>
-</div>
+  </div></div>
 
 <!-- ══════════════════════════════════════ CONTACT ═══════════════════════════ -->
 <div id="page-contact" class="page">
@@ -843,17 +811,7 @@ footer{
       <div class="soc-row"><span class="soc-name">Vimeo</span><span class="soc-handle">vimeo.com/[profile]</span><span class="soc-arr">↗</span></div>
       <div class="soc-row"><span class="soc-name">SoundCloud</span><span class="soc-handle">soundcloud.com/[profile]</span><span class="soc-arr">↗</span></div>
     </div>
-  </div>
-  <footer>
-    <div class="foot-name">Tjelle</div>
-    <div class="foot-links">
-      <span class="foot-link" onclick="go('home')"  data-en="Home"         data-de="Start">Home</span>
-      <span class="foot-link" onclick="go('comps')" data-en="Compositions" data-de="Werke">Compositions</span>
-      <span class="foot-link" onclick="go('impressum')" data-en="Impressum" data-de="Impressum">Impressum</span>
-    </div>
-    <div class="foot-copy">© Tjelle 2025</div>
-  </footer>
-</div>
+  </div></div>
 
 <!-- ══════════════════════════════════════ JS ════════════════════════════════ -->
 <!-- ══════════════════════════════════════ IMPRESSUM ═════════════════════════ -->
@@ -883,16 +841,7 @@ footer{
     <p>Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte wird jedoch keine Gewähr übernommen.</p>
     <p>Als Diensteanbieter bin ich gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.</p>
     <p style="margin-top:32px;font-size:.75rem;color:var(--ink-3)" data-en="⚠ Placeholder — replace all [brackets] with your real information before publishing." data-de="⚠ Platzhalter — alle [Klammern] vor Veröffentlichung durch echte Angaben ersetzen.">⚠ Platzhalter — alle [Klammern] vor Veröffentlichung durch echte Angaben ersetzen.</p>
-  </div>
-  <footer>
-    <div class="foot-name">Tjelle</div>
-    <div class="foot-links">
-      <span class="foot-link" onclick="go('home')" data-en="Home" data-de="Start">Home</span>
-      <span class="foot-link" onclick="go('privacy')" data-en="Privacy" data-de="Datenschutz">Privacy</span>
-    </div>
-    <div class="foot-copy">© Tjelle 2025</div>
-  </footer>
-</div>
+  </div></div>
 
 <!-- ══════════════════════════════════════ DATENSCHUTZ ═══════════════════════ -->
 <div id="page-privacy" class="page">
@@ -925,16 +874,21 @@ footer{
     <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer personenbezogenen Daten sowie das Recht auf Datenübertragbarkeit. Anfragen richten Sie bitte an: <span class="legal-ph">[deine@email.de]</span></p>
 
     <p style="margin-top:32px;font-size:.75rem;color:var(--ink-3)">⚠ Platzhalter — alle [Klammern] vor Veröffentlichung durch echte Angaben ersetzen. Empfehlung: finales Dokument via <a href="https://www.e-recht24.de/muster-datenschutzerklaerung.html" target="_blank" style="color:var(--navy)">e-recht24.de</a> generieren.</p>
+  </div></div>
+
+<!-- ── SHARED FOOTER (injected into every page by JS) ────────────────────── -->
+<footer id="site-footer">
+  <div class="foot-name" onclick="go('home')">Tjelle</div>
+  <div class="foot-links">
+    <span class="foot-link" onclick="go('home')"       data-en="Home"         data-de="Start">Home</span>
+    <span class="foot-link" onclick="go('comps')"      data-en="Compositions" data-de="Werke">Compositions</span>
+    <span class="foot-link" onclick="go('film')"       data-en="Film Music"   data-de="Filmmusik">Film Music</span>
+    <span class="foot-link" onclick="go('contact')"    data-en="Contact"      data-de="Kontakt">Contact</span>
+    <span class="foot-link" onclick="go('impressum')"  data-en="Impressum"    data-de="Impressum">Impressum</span>
+    <span class="foot-link" onclick="go('privacy')"    data-en="Privacy"      data-de="Datenschutz">Privacy</span>
   </div>
-  <footer>
-    <div class="foot-name">Tjelle</div>
-    <div class="foot-links">
-      <span class="foot-link" onclick="go('home')"      data-en="Home"      data-de="Start">Home</span>
-      <span class="foot-link" onclick="go('impressum')" data-en="Impressum" data-de="Impressum">Impressum</span>
-    </div>
-    <div class="foot-copy">© Tjelle 2025</div>
-  </footer>
-</div>
+  <div class="foot-copy">© Tjelle 2025</div>
+</footer>
 
 <script>
 let cur = 'home', lang = 'en';
@@ -955,6 +909,8 @@ function go(id, pushState = true) {
   document.querySelectorAll('.nl').forEach(l => l.classList.toggle('on', l.dataset.p === id));
   updateNav();
   setTimeout(initSR, 100);
+  // Move shared footer into current page
+  el.appendChild(document.getElementById('site-footer'));
   // Browser history
   if (pushState) history.pushState({page: id}, '', '#'+id);
 }
@@ -1022,19 +978,56 @@ function startPlay(btn) {
   const p = btn.closest('.aplayer');
   const fill = p.querySelector('.afill');
   const ct = p.querySelector('.ct');
-  let pct = parseFloat(fill.style.width) || 0;
-  timer = setInterval(()=>{
-    pct += 0.06; if (pct >= 100) { pct = 0; stopPlay(btn); return; }
-    fill.style.width = pct+'%';
-    const s = Math.floor((pct/100)*154);
-    ct.textContent = Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
-  }, 100);
+  const dur = p.querySelector('.adur');
+  const audio = p.querySelector('audio');
+
+  if (audio) {
+    // Real audio playback
+    audio.play();
+    const update = () => {
+      if (!audio.duration) return;
+      const pct = (audio.currentTime / audio.duration) * 100;
+      fill.style.width = pct + '%';
+      ct.textContent = fmtTime(audio.currentTime);
+      if (dur) dur.textContent = fmtTime(audio.duration);
+    };
+    audio.addEventListener('timeupdate', update);
+    audio.addEventListener('ended', () => stopPlay(btn));
+    audio.addEventListener('loadedmetadata', () => { if (dur) dur.textContent = fmtTime(audio.duration); });
+    btn._stopAudio = () => { audio.pause(); audio.removeEventListener('timeupdate', update); };
+  } else {
+    // Demo mode — fake progress
+    let pct = parseFloat(fill.style.width) || 0;
+    timer = setInterval(()=>{
+      pct += 0.08; if (pct >= 100) { stopPlay(btn); return; }
+      fill.style.width = pct + '%';
+      const s = Math.floor((pct / 100) * 154);
+      ct.textContent = fmtTime(s);
+    }, 100);
+  }
 }
 function stopPlay(btn) {
   btn.dataset.pl = 'false';
   btn.querySelector('.pi').textContent = '▶';
+  if (btn._stopAudio) { btn._stopAudio(); btn._stopAudio = null; }
   clearInterval(timer); timer = null; activeBtn = null;
 }
+function fmtTime(s) {
+  s = Math.floor(s);
+  return Math.floor(s/60) + ':' + String(s%60).padStart(2,'0');
+}
+
+// Click on progress bar to seek
+document.addEventListener('click', e => {
+  const bar = e.target.closest('.abar');
+  if (!bar) return;
+  const p = bar.closest('.aplayer');
+  const audio = p && p.querySelector('audio');
+  if (!audio || !audio.duration) return;
+  const rect = bar.getBoundingClientRect();
+  const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+  audio.currentTime = pct * audio.duration;
+});
 
 function initSR() {
   const els = document.querySelectorAll('#page-'+cur+' .sr');
@@ -1104,20 +1097,26 @@ async function loadCMS() {
         if (a.bio2_en) html += `<p data-en="${esc(a.bio2_en)}" data-de="${esc(a.bio2_de||a.bio2_en)}" style="margin-top:20px">${lang==='de' ? (a.bio2_de||a.bio2_en) : a.bio2_en}</p>`;
         if (html) bioWrap.innerHTML = html;
       }
-      // Tags
+      // Tags — only show if CMS provides them
       const tagsWrap = document.querySelector('.about-tags');
       if (tagsWrap && a.tags && a.tags.length) {
         tagsWrap.innerHTML = a.tags.map(t =>
           `<span class="tag" data-en="${esc(t.en)}" data-de="${esc(t.de)}">${lang==='de' ? t.de : t.en}</span>`
         ).join('');
+        tagsWrap.style.display = 'flex';
       }
       // Portrait
       const portrait = document.querySelector('.portrait');
       if (portrait && a.portrait) {
-        portrait.innerHTML = `<img src="${a.portrait}" alt="Tjelle">`;
+        portrait.innerHTML = `<img src="${a.portrait}" alt="Tjelle" style="width:100%;height:100%;object-fit:cover;">`;
+        const ph = portrait.querySelector('.portrait-ph');
+        if (ph) ph.style.display = 'none';
       }
       const cap = document.querySelector('.portrait-cap');
-      if (cap && a.portrait_credit) cap.textContent = a.portrait_credit;
+      if (cap) {
+        cap.textContent = a.portrait_credit || '';
+        cap.style.display = a.portrait_credit ? '' : 'none';
+      }
       // CV
       const cvLink = document.querySelector('.cv-link');
       if (cvLink && a.cv) cvLink.href = a.cv;
@@ -1196,7 +1195,7 @@ async function loadCMS() {
                 <div class="actrl">
                   <button class="pbtn" onclick="playToggle(this)"><span class="pi">▶</span></button>
                   <div class="abar-w"><div class="abar"><div class="afill"></div></div>
-                  <div class="atimes"><span class="ct">0:00</span><span>—</span></div></div>
+                  <div class="atimes"><span class="ct">0:00</span><span class="adur">${c.audio ? '—:——' : '—'}</span></div></div>
                 </div>
                 ${c.audio ? `<audio class="real-audio" src="${c.audio}" preload="none"></audio>` : `<div class="aph" data-en="No audio file yet" data-de="Noch keine Audiodatei">No audio file yet</div>`}
               </div>
@@ -1216,8 +1215,8 @@ async function loadCMS() {
           <div class="film-item sr${i%2===1?' d1':''}">
             <div class="film-embed">
               ${f.vimeo
-                ? `<iframe src="${f.vimeo}" width="100%" height="100%" frameborder="0" allowfullscreen style="position:absolute;inset:0;"></iframe>`
-                : `<div class="film-embed-ph"><div class="film-ph-play">▶</div><div class="film-ph-txt">Vimeo embed<br>add URL in admin</div></div>`}
+                ? `<iframe src="${f.vimeo}" width="100%" height="100%" frameborder="0" allowfullscreen allow="autoplay; fullscreen" style="position:absolute;inset:0;width:100%;height:100%;border:0;"></iframe>`
+                : `<div class="film-embed-ph"><div class="film-ph-play">▶</div><div class="film-ph-txt" data-en="Add YouTube or Vimeo URL in admin" data-de="YouTube- oder Vimeo-Link im Admin eingeben">Add YouTube or Vimeo URL in admin</div></div>`}
             </div>
             <div>
               <div class="film-num">${String(i+1).padStart(2,'0')}</div>
@@ -1261,7 +1260,9 @@ if (window.netlifyIdentity) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Handle direct URL with hash (e.g. tjelle.netlify.app/#impressum)
+  // Attach footer to initial page
+  document.getElementById('page-home').appendChild(document.getElementById('site-footer'));
+  // Handle direct URL with hash
   const hash = location.hash.replace('#','');
   if (hash && pages.includes(hash)) {
     go(hash, false);

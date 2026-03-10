@@ -61,7 +61,7 @@ collections:
               - { label: "Year", name: year, widget: string }
               - { label: "Genre (EN)", name: genre_en, widget: string, hint: "e.g. Short Film, Documentary, Feature Film" }
               - { label: "Genre (DE)", name: genre_de, widget: string, hint: "z.B. Kurzfilm, Dokumentarfilm, Spielfilm" }
-              - { label: "Vimeo Embed URL", name: vimeo, widget: string, required: false, hint: "https://player.vimeo.com/video/ID?dnt=1" }
+              - { label: "Video embed URL (YouTube or Vimeo)", name: vimeo, widget: string, required: false, hint: "YouTube: https://www.youtube.com/embed/VIDEO_ID  |  Vimeo: https://player.vimeo.com/video/ID?dnt=1" }
               - { label: "Description (EN)", name: desc_en, widget: text, required: false }
               - { label: "Description (DE)", name: desc_de, widget: text, required: false }
 

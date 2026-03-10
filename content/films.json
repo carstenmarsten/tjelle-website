@@ -1,24 +1,15 @@
 {
   "items": [
     {
-      "vimeo": "",
-      "genre_en": "Short Film",
+      "title_en": "Film Title",
       "title_de": "Filmtitel",
       "director": "Director Name",
-      "desc_de": "",
-      "title_en": "Film Title",
-      "desc_en": "",
       "year": "2024",
-      "genre_de": "Kurzfilm"
-    },
-    {
-      "title_en": "käse",
-      "title_de": "wurst",
-      "director": "legat",
-      "year": "2026",
-      "genre_en": "scales",
-      "genre_de": "schlagenoberhaupt",
-      "vimeo": "https://player.vimeo.com/video/123456?dnt=1"
+      "genre_en": "Short Film",
+      "genre_de": "Kurzfilm",
+      "vimeo": "",
+      "desc_en": "",
+      "desc_de": ""
     }
   ]
 }
