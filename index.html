@@ -41,15 +41,17 @@
 
 /* ── RESET ──────────────────────────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden;max-width:100%}
 body{
   background:var(--bg);color:var(--ink);
   font-family:var(--sans);font-weight:300;line-height:1.7;
   transition:background .35s,color .35s;
+  overflow-x:hidden;max-width:100%;
 }
 a{color:inherit;text-decoration:none}
-img{display:block;width:100%;height:100%;object-fit:cover}
+img{display:block;width:100%;height:100%;object-fit:cover;max-width:100%}
 button{border:none;background:none;cursor:pointer;font-family:inherit}
+iframe{max-width:100%;border:0}
 
 /* ── NAV ────────────────────────────────────────────────────────────────────── */
 #nav{
@@ -402,8 +404,14 @@ button{border:none;background:none;cursor:pointer;font-family:inherit}
 }
 .pg-desc{margin-top:18px;max-width:420px;font-size:.9rem;line-height:1.8;color:var(--ink-2)}
 
+/* Prevent grid children from overflowing their columns */
+.film-item > *,
+.comp-item > *,
+.about-grid > *,
+.tiles > *{min-width:0}
+
 /* ── COMPOSITIONS ────────────────────────────────────────────────────────────── */
-.comp-wrap{padding:0 var(--pad) 96px;max-width:1200px;margin:0 auto}
+.comp-wrap{padding:0 var(--pad) 96px;max-width:1200px;margin:0 auto;overflow:hidden}
 .comp-item{
   display:grid;grid-template-columns:1fr 340px;gap:44px;align-items:start;
   padding:48px 0;border-bottom:1px solid var(--rule);
@@ -441,16 +449,35 @@ button{border:none;background:none;cursor:pointer;font-family:inherit}
 .aph{margin-top:9px;font-size:.56rem;letter-spacing:.1em;color:rgba(255,255,255,.1);text-transform:uppercase;font-style:italic}
 
 /* ── FILM MUSIC ──────────────────────────────────────────────────────────────── */
-.film-wrap{padding:0 var(--pad) 96px;max-width:1200px;margin:0 auto}
+.film-wrap{padding:0 var(--pad) 96px;max-width:1200px;margin:0 auto;overflow:hidden}
 .film-item{
   display:grid;grid-template-columns:1.15fr 1fr;gap:52px;align-items:center;
   padding:68px 0;border-bottom:1px solid var(--rule);
+  /* use margin trick instead of direction:rtl to avoid overflow issues */
 }
 .film-item:first-child{border-top:1px solid var(--rule);margin-top:52px}
-.film-item:nth-child(even){direction:rtl}
-.film-item:nth-child(even)>*{direction:ltr}
+/* Even items: swap column order cleanly without direction:rtl */
+.film-item:nth-child(even){grid-template-columns:1fr 1.15fr}
+.film-item:nth-child(even) .film-embed{order:2}
+.film-item:nth-child(even) .film-text{order:1}
 
-.film-embed{aspect-ratio:16/9;background:var(--bg-2);overflow:hidden;position:relative}
+/* Video embed container — always 16:9, iframe fills it completely */
+.film-embed{
+  aspect-ratio:16/9;
+  background:var(--bg-2);
+  overflow:hidden;
+  position:relative;
+  width:100%;
+  min-width:0; /* prevent grid blowout */
+}
+.film-embed iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  display:block;
+}
 .film-embed-ph{
   width:100%;height:100%;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
@@ -595,10 +622,11 @@ footer{
 
   /* film */
   .film-item{
-    grid-template-columns:1fr;direction:ltr!important;
+    grid-template-columns:1fr !important;
     gap:24px;padding:44px 0;
   }
-  .film-item:nth-child(even)>*{direction:ltr}
+  .film-item:nth-child(even) .film-embed{order:0}
+  .film-item:nth-child(even) .film-text{order:0}
   .film-item:first-child{margin-top:36px}
   .film-num{font-size:2rem}
 
@@ -1357,33 +1385,30 @@ const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function runParallax() {
   if (noMotion || cur !== 'home') return;
   const y = window.scrollY;
+  const vh = window.innerHeight;
+  // Only run while hero is still partly visible
+  if (y > vh * 1.2) return;
 
-  // Hero background: slowest — stays in place longer
   const bg = document.querySelector('.h-bg');
   if (bg) bg.style.transform = `translateY(${y * 0.4}px)`;
 
-  // Glow orb: medium drift
   const glow = document.querySelector('.h-glow');
   if (glow) glow.style.transform = `translateY(${y * 0.22}px)`;
 
-  // "Tjelle" name: fastest upward — leads the motion
   const name = document.getElementById('h-name');
   if (name) name.style.transform = `translateY(${y * -0.18}px)`;
 
-  // "Composer" subtitle: medium speed — slightly behind name
   const role = document.getElementById('h-role');
   if (role) role.style.transform = `translateY(${y * -0.10}px)`;
 
-  // Statement line: barely moves — anchors the bottom
   const stmt = document.getElementById('hero-stmt');
   if (stmt) stmt.style.transform = `translateY(${y * -0.04}px)`;
 
-  // Featured tiles: subtle upward drift
   const tiles = document.querySelector('.tiles');
   if (tiles) {
     const rect = tiles.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      tiles.style.transform = `translateY(${(window.innerHeight - rect.top) * -0.04}px)`;
+    if (rect.top < vh && rect.bottom > 0) {
+      tiles.style.transform = `translateY(${(vh - rect.top) * -0.04}px)`;
     }
   }
 }
