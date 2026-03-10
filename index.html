@@ -189,16 +189,25 @@ button{border:none;background:none;cursor:pointer;font-family:inherit}
 .mm-lb:hover,.mm-lb.on{color:var(--white)}
 
 /* ── PAGES ──────────────────────────────────────────────────────────────────── */
-.page{display:none;min-height:100vh;flex-direction:column}
-.page.active{display:flex;animation:pgIn .5s var(--ease) both}
+.page{display:none;min-height:100vh}
+.page.active{display:block;animation:pgIn .5s var(--ease) both}
 @keyframes pgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 /* push footer to bottom on pages with little content */
+#page-comps,#page-film,#page-about,#page-contact,#page-impressum,#page-privacy{
+  display:none;min-height:100vh;flex-direction:column
+}
+#page-comps.active,#page-film.active,#page-about.active,
+#page-contact.active,#page-impressum.active,#page-privacy.active{display:flex}
 #page-comps   > .comp-wrap,
 #page-film    > .film-wrap,
 #page-about   > .about-grid,
 #page-contact > .contact-wrap,
 #page-impressum > .legal-wrap,
-#page-privacy   > .legal-wrap{flex:1}
+#page-privacy   > .legal-wrap{flex:1;min-height:200px}
+/* Home: hero takes natural height, featured section grows */
+#page-home{display:none;min-height:100vh;flex-direction:column}
+#page-home.active{display:flex}
+#page-home > #featured{flex:1}
 
 /* ── SCROLL REVEAL ──────────────────────────────────────────────────────────── */
 .sr{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
@@ -680,8 +689,8 @@ footer{
     <div class="h-glow"></div>
     <div class="h-hint" data-en="[ Replace with cinematic video loop — MP4/WebM ]" data-de="[ Durch Video-Loop ersetzen — MP4/WebM ]">[ Replace with cinematic video loop — MP4/WebM ]</div>
     <div class="h-content">
-      <h1 class="h-name">Tjelle</h1>
-      <p class="h-role" data-en="Composer" data-de="Komponist">Composer</p>
+      <h1 class="h-name" id="h-name">Tjelle</h1>
+      <p class="h-role" id="h-role" data-en="Composer" data-de="Komponist">Composer</p>
       <p class="h-stmt" id="hero-stmt" data-en="" data-de="">Music between tension and transcendence.</p>
     </div>
     <div class="h-scroll"><div class="h-scroll-line"></div><span data-en="scroll" data-de="scrollen">scroll</span></div>
@@ -1283,39 +1292,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ── PARALLAX ─────────────────────────────────────────────────────────────────
-// Only runs on home page, disabled if user prefers reduced motion
 const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function runParallax() {
   if (noMotion || cur !== 'home') return;
   const y = window.scrollY;
 
-  // Hero background: drifts up at 35% of scroll speed
+  // Hero background: slowest — stays in place longer
   const bg = document.querySelector('.h-bg');
-  if (bg) bg.style.transform = `translateY(${y * 0.35}px)`;
+  if (bg) bg.style.transform = `translateY(${y * 0.4}px)`;
 
-  // Hero glow orb: drifts slightly faster for depth
+  // Glow orb: medium drift
   const glow = document.querySelector('.h-glow');
-  if (glow) glow.style.transform = `translateY(${y * 0.2}px)`;
+  if (glow) glow.style.transform = `translateY(${y * 0.22}px)`;
 
-  // Hero content: very subtle counter-drift (stays readable longer)
-  const content = document.querySelector('.h-content');
-  if (content) content.style.transform = `translateY(${y * -0.06}px)`;
+  // "Tjelle" name: fastest upward — leads the motion
+  const name = document.getElementById('h-name');
+  if (name) name.style.transform = `translateY(${y * -0.18}px)`;
 
-  // Featured tiles: drift up gently as you scroll into them
+  // "Composer" subtitle: medium speed — slightly behind name
+  const role = document.getElementById('h-role');
+  if (role) role.style.transform = `translateY(${y * -0.10}px)`;
+
+  // Statement line: barely moves — anchors the bottom
+  const stmt = document.getElementById('hero-stmt');
+  if (stmt) stmt.style.transform = `translateY(${y * -0.04}px)`;
+
+  // Featured tiles: subtle upward drift
   const tiles = document.querySelector('.tiles');
   if (tiles) {
     const rect = tiles.getBoundingClientRect();
-    const inView = rect.top < window.innerHeight && rect.bottom > 0;
-    if (inView) {
-      const offset = (window.innerHeight - rect.top) * 0.04;
-      tiles.style.transform = `translateY(${-offset}px)`;
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      tiles.style.transform = `translateY(${(window.innerHeight - rect.top) * -0.04}px)`;
     }
   }
 }
 
 window.addEventListener('scroll', () => { updateNav(); runParallax(); }, {passive:true});
-document.addEventListener('scroll', () => { updateNav(); runParallax(); }, {passive:true});
 </script>
 </body>
 </html>
