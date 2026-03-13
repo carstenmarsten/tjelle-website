@@ -1043,13 +1043,24 @@ function go(id, pushState = true) {
   cur = id;
   const el = document.getElementById('page-'+id);
   el.classList.add('active');
+
+  // Reset scroll — use both methods for cross-browser reliability
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
   window.scrollTo({top:0,behavior:'instant'});
+
   document.querySelectorAll('.nl').forEach(l => {
     const active = l.dataset.p === id;
     l.classList.toggle('on', active);
     l.setAttribute('aria-current', active ? 'page' : 'false');
   });
-  updateNav();
+
+  // Set nav state directly — do NOT rely on scrollY timing
+  document.getElementById('nav').className = id === 'home' ? 'over' : 'solid';
+
+  // Reset stale parallax transforms when returning to home
+  if (id === 'home') resetParallax();
+
   document.title = (pageTitles[id] && pageTitles[id][lang]) || 'Tjelle – Composer';
   setTimeout(initSR, 100);
   if (pushState) history.pushState({page: id}, '', '#'+id);
@@ -1062,9 +1073,10 @@ window.addEventListener('popstate', e => {
 });
 
 function updateNav() {
+  // Only called from scroll event — nav state on navigation is set directly in go()
+  if (cur !== 'home') return;
   const nav = document.getElementById('nav');
-  const onHero = cur === 'home' && window.scrollY < 60;
-  nav.className = onHero ? 'over' : 'solid';
+  nav.className = window.scrollY < 60 ? 'over' : 'solid';
 }
 function toggleTheme() {
   const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
@@ -1426,6 +1438,8 @@ document.addEventListener('DOMContentLoaded', () => {
     go(hash, false);
   } else {
     history.replaceState({page:'home'}, '', '#home');
+    // Default: home page with transparent nav
+    document.getElementById('nav').className = 'over';
   }
   updateNav();
   initSR();
@@ -1434,6 +1448,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ── PARALLAX ─────────────────────────────────────────────────────────────────
+function resetParallax() {
+  [
+    document.querySelector('.h-bg'),
+    document.querySelector('.h-glow'),
+    document.getElementById('h-name'),
+    document.getElementById('h-role'),
+    document.getElementById('hero-stmt'),
+    document.querySelector('.tiles'),
+  ].forEach(el => { if (el) el.style.transform = ''; });
+}
+
 const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function runParallax() {
