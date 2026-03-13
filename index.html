@@ -5,7 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Tjelle – Composer</title>
 <meta name="description" content="Tjelle is a composer creating music for film and contemporary concert works."/>
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♪</text></svg>"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Tjelle – Composer"/>
+<meta property="og:description" content="Tjelle is a composer creating music for film and contemporary concert works."/>
+<meta property="og:site_name" content="Tjelle"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Tjelle – Composer"/>
+<meta name="twitter:description" content="Tjelle is a composer creating music for film and contemporary concert works."/>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
@@ -50,7 +58,7 @@ body{
 }
 a{color:inherit;text-decoration:none}
 img{display:block;width:100%;height:100%;object-fit:cover;max-width:100%}
-button{border:none;background:none;cursor:pointer;font-family:inherit}
+button{border:none;background:none;cursor:pointer;font-family:inherit;font-size:inherit;color:inherit;padding:0;text-align:inherit;line-height:inherit}
 iframe{max-width:100%;border:0}
 
 /* ── NAV ────────────────────────────────────────────────────────────────────── */
@@ -254,12 +262,6 @@ iframe{max-width:100%;border:0}
   filter:blur(70px);animation:glw 18s ease-in-out infinite;pointer-events:none;
 }
 @keyframes glw{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-30px) scale(1.06)}}
-.h-hint{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  border:1px dashed rgba(255,255,255,.07);padding:12px 28px;
-  font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
-  color:rgba(255,255,255,.1);pointer-events:none;text-align:center;
-}
 .h-content{position:relative;z-index:2}
 .h-name{
   font-family:var(--serif);
@@ -660,23 +662,23 @@ footer{
 
 <!-- ── NAV ──────────────────────────────────────────────────────────────────── -->
 <nav id="nav" class="over">
-  <div class="nav-logo" onclick="go('home')">Tjelle</div>
-  <div class="nav-links">
-    <span class="nl on"  data-p="home"    onclick="go('home')"    data-en="Home"         data-de="Start">Home</span>
-    <span class="nl"     data-p="comps"   onclick="go('comps')"   data-en="Compositions" data-de="Werke">Compositions</span>
-    <span class="nl"     data-p="film"    onclick="go('film')"    data-en="Film Music"   data-de="Filmmusik">Film Music</span>
-    <span class="nl"     data-p="about"   onclick="go('about')"   data-en="About"        data-de="Über">About</span>
-    <span class="nl"     data-p="contact" onclick="go('contact')" data-en="Contact"      data-de="Kontakt">Contact</span>
-  </div>
+  <button class="nav-logo" onclick="go('home')" aria-label="Go to homepage">Tjelle</button>
+  <nav class="nav-links" aria-label="Main navigation">
+    <button class="nl on"  data-p="home"    onclick="go('home')"    data-en="Home"         data-de="Start"         aria-current="page">Home</button>
+    <button class="nl"     data-p="comps"   onclick="go('comps')"   data-en="Compositions" data-de="Werke">Compositions</button>
+    <button class="nl"     data-p="film"    onclick="go('film')"    data-en="Film Music"   data-de="Filmmusik">Film Music</button>
+    <button class="nl"     data-p="about"   onclick="go('about')"   data-en="About"        data-de="Über">About</button>
+    <button class="nl"     data-p="contact" onclick="go('contact')" data-en="Contact"      data-de="Kontakt">Contact</button>
+  </nav>
   <div class="nav-r">
-    <div class="thm" onclick="toggleTheme()" title="Toggle light/dark">
-      <span class="thm-ico thm-ico-sun">☀</span>
+    <button class="thm" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
+      <span class="thm-ico thm-ico-sun" aria-hidden="true">☀</span>
       <div class="thm-dot"></div>
-      <span class="thm-ico thm-ico-moon">☽</span>
-    </div>
-    <div class="lang-tgl">
-      <span class="lb on" onclick="setLang('en')">EN</span>
-      <span class="lb"    onclick="setLang('de')">DE</span>
+      <span class="thm-ico thm-ico-moon" aria-hidden="true">☽</span>
+    </button>
+    <div class="lang-tgl" role="group" aria-label="Language selection">
+      <button class="lb on" onclick="setLang('en')" aria-label="English" aria-pressed="true">EN</button>
+      <button class="lb"    onclick="setLang('de')" aria-label="Deutsch" aria-pressed="false">DE</button>
     </div>
     <button class="hbg" onclick="toggleMob()" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
@@ -686,26 +688,26 @@ footer{
 <div id="mmenu-overlay" onclick="closeMob()"></div>
 
 <!-- ── MOBILE MENU ──────────────────────────────────────────────────────────── -->
-<div id="mmenu">
+<nav id="mmenu" aria-label="Mobile navigation" aria-hidden="true">
   <span class="mm-close" onclick="closeMob()">×</span>
-  <span class="mml" onclick="go('home');    closeMob()" data-en="Home"         data-de="Start">Home</span>
-  <span class="mml" onclick="go('comps');   closeMob()" data-en="Compositions" data-de="Werke">Compositions</span>
-  <span class="mml" onclick="go('film');    closeMob()" data-en="Film Music"   data-de="Filmmusik">Film Music</span>
-  <span class="mml" onclick="go('about');   closeMob()" data-en="About"        data-de="Über">About</span>
-  <span class="mml" onclick="go('contact'); closeMob()" data-en="Contact"      data-de="Kontakt">Contact</span>
+  <button class="mml" onclick="go('home');    closeMob()" data-en="Home"         data-de="Start">Home</button>
+  <button class="mml" onclick="go('comps');   closeMob()" data-en="Compositions" data-de="Werke">Compositions</button>
+  <button class="mml" onclick="go('film');    closeMob()" data-en="Film Music"   data-de="Filmmusik">Film Music</button>
+  <button class="mml" onclick="go('about');   closeMob()" data-en="About"        data-de="Über">About</button>
+  <button class="mml" onclick="go('contact'); closeMob()" data-en="Contact"      data-de="Kontakt">Contact</button>
   <div class="mm-lang">
-    <span class="mm-lb on" onclick="setLang('en')">EN</span>
-    <span class="mm-lb"    onclick="setLang('de')">DE</span>
+    <button class="mm-lb on" onclick="setLang('en')">EN</button>
+    <button class="mm-lb"    onclick="setLang('de')">DE</button>
   </div>
-</div>
+</nav>
 
 <!-- ══════════════════════════════════════ HOME ══════════════════════════════ -->
 <div id="page-home" class="page active">
+  <main id="main-home">
 
   <section id="hero">
     <div class="h-bg"></div>
     <div class="h-glow"></div>
-    <div class="h-hint" data-en="[ Replace with cinematic video loop — MP4/WebM ]" data-de="[ Durch Video-Loop ersetzen — MP4/WebM ]">[ Replace with cinematic video loop — MP4/WebM ]</div>
     <div class="h-content">
       <h1 class="h-name" id="h-name">Tjelle</h1>
       <p class="h-role" id="h-role" data-en="Composer" data-de="Komponist">Composer</p>
@@ -722,11 +724,11 @@ footer{
   <section id="featured" class="sr">
     <div class="feat-head">
       <h2 class="feat-title" data-en="Selected works" data-de="Ausgewählte Werke">Selected works</h2>
-      <span class="see-all" onclick="go('comps')" data-en="All compositions →" data-de="Alle Werke →">All compositions →</span>
+      <button class="see-all" onclick="go('comps')" data-en="All compositions →" data-de="Alle Werke →">All compositions →</button>
     </div>
     <div class="tiles">
 
-      <div class="tile sr" onclick="go('film')">
+      <div class="tile sr" role="button" tabindex="0" onclick="go('film')" onkeydown="if(event.key==='Enter'||event.key===' ')go('film')" aria-label="Go to Film Music">
         <div class="tile-bg"></div>
         <div class="tile-ph"><span class="tile-ph-txt" data-en="Replace with film still" data-de="Durch Filmstill ersetzen">Replace with film still</span></div>
         <div class="tile-overlay"></div>
@@ -738,7 +740,7 @@ footer{
         <div class="tile-arr">→</div>
       </div>
 
-      <div class="tile sr d1" onclick="go('comps')">
+      <div class="tile sr d1" role="button" tabindex="0" onclick="go('comps')" onkeydown="if(event.key==='Enter'||event.key===' ')go('comps')" aria-label="Go to Compositions">
         <div class="tile-bg"></div>
         <div class="tile-ph"><span class="tile-ph-txt" data-en="Replace with image" data-de="Durch Bild ersetzen">Replace with image</span></div>
         <div class="tile-overlay"></div>
@@ -750,7 +752,7 @@ footer{
         <div class="tile-arr">→</div>
       </div>
 
-      <div class="tile sr d2" onclick="go('comps')">
+      <div class="tile sr d2" role="button" tabindex="0" onclick="go('comps')" onkeydown="if(event.key==='Enter'||event.key===' ')go('comps')" aria-label="Go to Compositions">
         <div class="tile-bg"></div>
         <div class="tile-ph"><span class="tile-ph-txt" data-en="Replace with image" data-de="Durch Bild ersetzen">Replace with image</span></div>
         <div class="tile-overlay"></div>
@@ -774,22 +776,24 @@ footer{
     <div class="rule"></div>
     <span class="btn btn-out" onclick="go('contact')" data-en="Get in touch" data-de="Kontakt aufnehmen">Get in touch</span>
   </section>
+  </main>
   <footer>
-    <div class="foot-name" onclick="go('home')" id="foot-name-home">Tjelle</div>
+    <button class="foot-name" onclick="go('home')" id="foot-name-home">Tjelle</button>
     <div class="foot-links">
-      <span class="foot-link" onclick="go('home')"      data-en="Home"         data-de="Start">Home</span>
-      <span class="foot-link" onclick="go('comps')"     data-en="Compositions" data-de="Werke">Compositions</span>
-      <span class="foot-link" onclick="go('film')"      data-en="Film Music"   data-de="Filmmusik">Film Music</span>
-      <span class="foot-link" onclick="go('contact')"   data-en="Contact"      data-de="Kontakt">Contact</span>
-      <span class="foot-link" onclick="go('impressum')" data-en="Impressum"    data-de="Impressum">Impressum</span>
-      <span class="foot-link" onclick="go('privacy')"   data-en="Privacy"      data-de="Datenschutz">Privacy</span>
+      <button class="foot-link" onclick="go('home')"      data-en="Home"         data-de="Start">Home</button>
+      <button class="foot-link" onclick="go('comps')"     data-en="Compositions" data-de="Werke">Compositions</button>
+      <button class="foot-link" onclick="go('film')"      data-en="Film Music"   data-de="Filmmusik">Film Music</button>
+      <button class="foot-link" onclick="go('contact')"   data-en="Contact"      data-de="Kontakt">Contact</button>
+      <button class="foot-link" onclick="go('impressum')" data-en="Impressum"    data-de="Impressum">Impressum</button>
+      <button class="foot-link" onclick="go('privacy')"   data-en="Privacy"      data-de="Datenschutz">Privacy</button>
     </div>
-    <div class="foot-copy">© Tjelle 2025</div>
+    <div class="foot-copy">© Tjelle <span class="foot-year"></span></div>
   </footer>
 </div>
 
 <!-- ══════════════════════════════════════ COMPOSITIONS ══════════════════════ -->
 <div id="page-comps" class="page">
+  <main id="main-comps">
   <div class="pg-head wrap">
     <p class="eyebrow" data-en="Concert Music" data-de="Konzertmusik">Concert Music</p>
     <h1 class="pg-title" data-en="Compositions" data-de="Werke">Compositions</h1>
@@ -798,22 +802,24 @@ footer{
   <div class="comp-wrap" id="comp-list">
     <!-- Loaded dynamically from content/compositions.json -->
   </div>
+  </main>
   <footer>
-    <div class="foot-name" onclick="go('home')" id="foot-name-comps">Tjelle</div>
+    <button class="foot-name" onclick="go('home')" id="foot-name-comps">Tjelle</button>
     <div class="foot-links">
-      <span class="foot-link" onclick="go('home')"      data-en="Home"         data-de="Start">Home</span>
-      <span class="foot-link" onclick="go('comps')"     data-en="Compositions" data-de="Werke">Compositions</span>
-      <span class="foot-link" onclick="go('film')"      data-en="Film Music"   data-de="Filmmusik">Film Music</span>
-      <span class="foot-link" onclick="go('contact')"   data-en="Contact"      data-de="Kontakt">Contact</span>
-      <span class="foot-link" onclick="go('impressum')" data-en="Impressum"    data-de="Impressum">Impressum</span>
-      <span class="foot-link" onclick="go('privacy')"   data-en="Privacy"      data-de="Datenschutz">Privacy</span>
+      <button class="foot-link" onclick="go('home')"      data-en="Home"         data-de="Start">Home</button>
+      <button class="foot-link" onclick="go('comps')"     data-en="Compositions" data-de="Werke">Compositions</button>
+      <button class="foot-link" onclick="go('film')"      data-en="Film Music"   data-de="Filmmusik">Film Music</button>
+      <button class="foot-link" onclick="go('contact')"   data-en="Contact"      data-de="Kontakt">Contact</button>
+      <button class="foot-link" onclick="go('impressum')" data-en="Impressum"    data-de="Impressum">Impressum</button>
+      <button class="foot-link" onclick="go('privacy')"   data-en="Privacy"      data-de="Datenschutz">Privacy</button>
     </div>
-    <div class="foot-copy">© Tjelle 2025</div>
+    <div class="foot-copy">© Tjelle <span class="foot-year"></span></div>
   </footer>
 </div>
 
 <!-- ══════════════════════════════════════ FILM MUSIC ════════════════════════ -->
 <div id="page-film" class="page">
+  <main id="main-film">
   <div class="pg-head wrap">
     <p class="eyebrow" data-en="Film Music" data-de="Filmmusik">Film Music</p>
     <h1 class="pg-title" data-en="Film." data-de="Film.">Film.</h1>
@@ -822,22 +828,24 @@ footer{
   <div class="film-wrap" id="film-list">
     <!-- Loaded dynamically from content/films.json -->
   </div>
+  </main>
   <footer>
-    <div class="foot-name" onclick="go('home')" id="foot-name-film">Tjelle</div>
+    <button class="foot-name" onclick="go('home')" id="foot-name-film">Tjelle</button>
     <div class="foot-links">
-      <span class="foot-link" onclick="go('home')"      data-en="Home"         data-de="Start">Home</span>
-      <span class="foot-link" onclick="go('comps')"     data-en="Compositions" data-de="Werke">Compositions</span>
-      <span class="foot-link" onclick="go('film')"      data-en="Film Music"   data-de="Filmmusik">Film Music</span>
-      <span class="foot-link" onclick="go('contact')"   data-en="Contact"      data-de="Kontakt">Contact</span>
-      <span class="foot-link" onclick="go('impressum')" data-en="Impressum"    data-de="Impressum">Impressum</span>
-      <span class="foot-link" onclick="go('privacy')"   data-en="Privacy"      data-de="Datenschutz">Privacy</span>
+      <button class="foot-link" onclick="go('home')"      data-en="Home"         data-de="Start">Home</button>
+      <button class="foot-link" onclick="go('comps')"     data-en="Compositions" data-de="Werke">Compositions</button>
+      <button class="foot-link" onclick="go('film')"      data-en="Film Music"   data-de="Filmmusik">Film Music</button>
+      <button class="foot-link" onclick="go('contact')"   data-en="Contact"      data-de="Kontakt">Contact</button>
+      <button class="foot-link" onclick="go('impressum')" data-en="Impressum"    data-de="Impressum">Impressum</button>
+      <button class="foot-link" onclick="go('privacy')"   data-en="Privacy"      data-de="Datenschutz">Privacy</button>
     </div>
-    <div class="foot-copy">© Tjelle 2025</div>
+    <div class="foot-copy">© Tjelle <span class="foot-year"></span></div>
   </footer>
 </div>
 
 <!-- ══════════════════════════════════════ ABOUT ═════════════════════════════ -->
 <div id="page-about" class="page">
+  <main id="main-about">
   <div class="pg-head wrap">
     <p class="eyebrow" data-en="The composer" data-de="Der Komponist">The composer</p>
     <h1 class="pg-title" data-en="About." data-de="Über.">About.</h1>
@@ -861,25 +869,27 @@ footer{
       <div class="about-tags" style="display:none">
         <!-- Filled from about.json tags via CMS — hidden until populated -->
       </div>
-      <a href="#" class="cv-link" data-en="Download CV (PDF) ↓" data-de="Lebenslauf laden (PDF) ↓">Download CV (PDF) ↓</a>
+      <a href="#" class="cv-link" data-en="Download CV (PDF) ↓" data-de="Lebenslauf laden (PDF) ↓" style="display:none">Download CV (PDF) ↓</a>
     </div>
   </div>
+  </main>
   <footer>
-    <div class="foot-name" onclick="go('home')" id="foot-name-about">Tjelle</div>
+    <button class="foot-name" onclick="go('home')" id="foot-name-about">Tjelle</button>
     <div class="foot-links">
-      <span class="foot-link" onclick="go('home')"      data-en="Home"         data-de="Start">Home</span>
-      <span class="foot-link" onclick="go('comps')"     data-en="Compositions" data-de="Werke">Compositions</span>
-      <span class="foot-link" onclick="go('film')"      data-en="Film Music"   data-de="Filmmusik">Film Music</span>
-      <span class="foot-link" onclick="go('contact')"   data-en="Contact"      data-de="Kontakt">Contact</span>
-      <span class="foot-link" onclick="go('impressum')" data-en="Impressum"    data-de="Impressum">Impressum</span>
-      <span class="foot-link" onclick="go('privacy')"   data-en="Privacy"      data-de="Datenschutz">Privacy</span>
+      <button class="foot-link" onclick="go('home')"      data-en="Home"         data-de="Start">Home</button>
+      <button class="foot-link" onclick="go('comps')"     data-en="Compositions" data-de="Werke">Compositions</button>
+      <button class="foot-link" onclick="go('film')"      data-en="Film Music"   data-de="Filmmusik">Film Music</button>
+      <button class="foot-link" onclick="go('contact')"   data-en="Contact"      data-de="Kontakt">Contact</button>
+      <button class="foot-link" onclick="go('impressum')" data-en="Impressum"    data-de="Impressum">Impressum</button>
+      <button class="foot-link" onclick="go('privacy')"   data-en="Privacy"      data-de="Datenschutz">Privacy</button>
     </div>
-    <div class="foot-copy">© Tjelle 2025</div>
+    <div class="foot-copy">© Tjelle <span class="foot-year"></span></div>
   </footer>
 </div>
 
 <!-- ══════════════════════════════════════ CONTACT ═══════════════════════════ -->
 <div id="page-contact" class="page">
+  <main id="main-contact">
   <div class="pg-head wrap">
     <p class="eyebrow" data-en="Get in touch" data-de="Schreib mir">Get in touch</p>
     <h1 class="pg-title" data-en="Contact." data-de="Kontakt.">Contact.</h1>
@@ -898,23 +908,25 @@ footer{
       <div class="soc-row"><span class="soc-name">SoundCloud</span><span class="soc-handle">soundcloud.com/[profile]</span><span class="soc-arr">↗</span></div>
     </div>
   </div>
+  </main>
   <footer>
-    <div class="foot-name" onclick="go('home')" id="foot-name-contact">Tjelle</div>
+    <button class="foot-name" onclick="go('home')" id="foot-name-contact">Tjelle</button>
     <div class="foot-links">
-      <span class="foot-link" onclick="go('home')"      data-en="Home"         data-de="Start">Home</span>
-      <span class="foot-link" onclick="go('comps')"     data-en="Compositions" data-de="Werke">Compositions</span>
-      <span class="foot-link" onclick="go('film')"      data-en="Film Music"   data-de="Filmmusik">Film Music</span>
-      <span class="foot-link" onclick="go('contact')"   data-en="Contact"      data-de="Kontakt">Contact</span>
-      <span class="foot-link" onclick="go('impressum')" data-en="Impressum"    data-de="Impressum">Impressum</span>
-      <span class="foot-link" onclick="go('privacy')"   data-en="Privacy"      data-de="Datenschutz">Privacy</span>
+      <button class="foot-link" onclick="go('home')"      data-en="Home"         data-de="Start">Home</button>
+      <button class="foot-link" onclick="go('comps')"     data-en="Compositions" data-de="Werke">Compositions</button>
+      <button class="foot-link" onclick="go('film')"      data-en="Film Music"   data-de="Filmmusik">Film Music</button>
+      <button class="foot-link" onclick="go('contact')"   data-en="Contact"      data-de="Kontakt">Contact</button>
+      <button class="foot-link" onclick="go('impressum')" data-en="Impressum"    data-de="Impressum">Impressum</button>
+      <button class="foot-link" onclick="go('privacy')"   data-en="Privacy"      data-de="Datenschutz">Privacy</button>
     </div>
-    <div class="foot-copy">© Tjelle 2025</div>
+    <div class="foot-copy">© Tjelle <span class="foot-year"></span></div>
   </footer>
 </div>
 
 <!-- ══════════════════════════════════════ JS ════════════════════════════════ -->
 <!-- ══════════════════════════════════════ IMPRESSUM ═════════════════════════ -->
 <div id="page-impressum" class="page">
+  <main id="main-impressum">
   <div class="pg-head wrap">
     <p class="eyebrow">Legal</p>
     <h1 class="pg-title" data-en="Impressum" data-de="Impressum">Impressum</h1>
@@ -941,22 +953,24 @@ footer{
     <p>Als Diensteanbieter bin ich gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.</p>
     <p style="margin-top:32px;font-size:.75rem;color:var(--ink-3)" data-en="⚠ Placeholder — replace all [brackets] with your real information before publishing." data-de="⚠ Platzhalter — alle [Klammern] vor Veröffentlichung durch echte Angaben ersetzen.">⚠ Platzhalter — alle [Klammern] vor Veröffentlichung durch echte Angaben ersetzen.</p>
   </div>
+  </main>
   <footer>
-    <div class="foot-name" onclick="go('home')" id="foot-name-impressum">Tjelle</div>
+    <button class="foot-name" onclick="go('home')" id="foot-name-impressum">Tjelle</button>
     <div class="foot-links">
-      <span class="foot-link" onclick="go('home')"      data-en="Home"         data-de="Start">Home</span>
-      <span class="foot-link" onclick="go('comps')"     data-en="Compositions" data-de="Werke">Compositions</span>
-      <span class="foot-link" onclick="go('film')"      data-en="Film Music"   data-de="Filmmusik">Film Music</span>
-      <span class="foot-link" onclick="go('contact')"   data-en="Contact"      data-de="Kontakt">Contact</span>
-      <span class="foot-link" onclick="go('impressum')" data-en="Impressum"    data-de="Impressum">Impressum</span>
-      <span class="foot-link" onclick="go('privacy')"   data-en="Privacy"      data-de="Datenschutz">Privacy</span>
+      <button class="foot-link" onclick="go('home')"      data-en="Home"         data-de="Start">Home</button>
+      <button class="foot-link" onclick="go('comps')"     data-en="Compositions" data-de="Werke">Compositions</button>
+      <button class="foot-link" onclick="go('film')"      data-en="Film Music"   data-de="Filmmusik">Film Music</button>
+      <button class="foot-link" onclick="go('contact')"   data-en="Contact"      data-de="Kontakt">Contact</button>
+      <button class="foot-link" onclick="go('impressum')" data-en="Impressum"    data-de="Impressum">Impressum</button>
+      <button class="foot-link" onclick="go('privacy')"   data-en="Privacy"      data-de="Datenschutz">Privacy</button>
     </div>
-    <div class="foot-copy">© Tjelle 2025</div>
+    <div class="foot-copy">© Tjelle <span class="foot-year"></span></div>
   </footer>
 </div>
 
 <!-- ══════════════════════════════════════ DATENSCHUTZ ═══════════════════════ -->
 <div id="page-privacy" class="page">
+  <main id="main-privacy">
   <div class="pg-head wrap">
     <p class="eyebrow">Legal</p>
     <h1 class="pg-title" data-en="Privacy Policy" data-de="Datenschutzerklärung">Privacy Policy</h1>
@@ -973,31 +987,32 @@ footer{
     </p>
 
     <h2>3. Hosting</h2>
-    <p>Diese Website wird bei Netlify Inc., 44 Montgomery Street, Suite 300, San Francisco, CA 94104, USA gehostet. Beim Aufruf dieser Website werden automatisch Verbindungsdaten (IP-Adresse, Datum, Uhrzeit, aufgerufene Seite) gespeichert. Weitere Informationen: <a href="https://www.netlify.com/privacy/" target="_blank">netlify.com/privacy</a></p>
+    <p>Diese Website wird bei Netlify Inc., 44 Montgomery Street, Suite 300, San Francisco, CA 94104, USA gehostet. Beim Aufruf dieser Website werden automatisch Verbindungsdaten (IP-Adresse, Datum, Uhrzeit, aufgerufene Seite) gespeichert. Weitere Informationen: <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener noreferrer">netlify.com/privacy</a></p>
 
     <h2>4. Keine Cookies / Tracking</h2>
     <p>Diese Website verwendet keine Cookies und kein Tracking durch Drittanbieter. <span class="legal-ph">[Falls du Google Analytics oder ähnliches einbindest: hier anpassen]</span></p>
 
     <h2>5. Externe Dienste</h2>
-    <p><strong>Google Fonts:</strong> Diese Seite lädt Schriftarten von Google Fonts (Google LLC, USA). Dabei kann die IP-Adresse übertragen werden. Weitere Informationen: <a href="https://policies.google.com/privacy" target="_blank">policies.google.com/privacy</a></p>
-    <p><strong>Vimeo:</strong> Auf der Filmmusik-Seite sind Videos via Vimeo eingebunden (Vimeo Inc., USA). Beim Abspielen werden Daten an Vimeo übertragen. Die Einbindung erfolgt mit dem <code>?dnt=1</code>-Parameter (Do Not Track). Weitere Informationen: <a href="https://vimeo.com/privacy" target="_blank">vimeo.com/privacy</a></p>
+    <p><strong>Google Fonts:</strong> Diese Seite lädt Schriftarten von Google Fonts (Google LLC, USA). Dabei kann die IP-Adresse übertragen werden. Weitere Informationen: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a></p>
+    <p><strong>Vimeo:</strong> Auf der Filmmusik-Seite sind Videos via Vimeo eingebunden (Vimeo Inc., USA). Beim Abspielen werden Daten an Vimeo übertragen. Die Einbindung erfolgt mit dem <code>?dnt=1</code>-Parameter (Do Not Track). Weitere Informationen: <a href="https://vimeo.com/privacy" target="_blank" rel="noopener noreferrer">vimeo.com/privacy</a></p>
 
     <h2>6. Ihre Rechte</h2>
     <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer personenbezogenen Daten sowie das Recht auf Datenübertragbarkeit. Anfragen richten Sie bitte an: <span class="legal-ph">[deine@email.de]</span></p>
 
-    <p style="margin-top:32px;font-size:.75rem;color:var(--ink-3)">⚠ Platzhalter — alle [Klammern] vor Veröffentlichung durch echte Angaben ersetzen. Empfehlung: finales Dokument via <a href="https://www.e-recht24.de/muster-datenschutzerklaerung.html" target="_blank" style="color:var(--navy)">e-recht24.de</a> generieren.</p>
+    <p style="margin-top:32px;font-size:.75rem;color:var(--ink-3)">⚠ Platzhalter — alle [Klammern] vor Veröffentlichung durch echte Angaben ersetzen. Empfehlung: finales Dokument via <a href="https://www.e-recht24.de/muster-datenschutzerklaerung.html" target="_blank" rel="noopener noreferrer" style="color:var(--navy)">e-recht24.de</a> generieren.</p>
   </div>
+  </main>
   <footer>
-    <div class="foot-name" onclick="go('home')" id="foot-name-privacy">Tjelle</div>
+    <button class="foot-name" onclick="go('home')" id="foot-name-privacy">Tjelle</button>
     <div class="foot-links">
-      <span class="foot-link" onclick="go('home')"      data-en="Home"         data-de="Start">Home</span>
-      <span class="foot-link" onclick="go('comps')"     data-en="Compositions" data-de="Werke">Compositions</span>
-      <span class="foot-link" onclick="go('film')"      data-en="Film Music"   data-de="Filmmusik">Film Music</span>
-      <span class="foot-link" onclick="go('contact')"   data-en="Contact"      data-de="Kontakt">Contact</span>
-      <span class="foot-link" onclick="go('impressum')" data-en="Impressum"    data-de="Impressum">Impressum</span>
-      <span class="foot-link" onclick="go('privacy')"   data-en="Privacy"      data-de="Datenschutz">Privacy</span>
+      <button class="foot-link" onclick="go('home')"      data-en="Home"         data-de="Start">Home</button>
+      <button class="foot-link" onclick="go('comps')"     data-en="Compositions" data-de="Werke">Compositions</button>
+      <button class="foot-link" onclick="go('film')"      data-en="Film Music"   data-de="Filmmusik">Film Music</button>
+      <button class="foot-link" onclick="go('contact')"   data-en="Contact"      data-de="Kontakt">Contact</button>
+      <button class="foot-link" onclick="go('impressum')" data-en="Impressum"    data-de="Impressum">Impressum</button>
+      <button class="foot-link" onclick="go('privacy')"   data-en="Privacy"      data-de="Datenschutz">Privacy</button>
     </div>
-    <div class="foot-copy">© Tjelle 2025</div>
+    <div class="foot-copy">© Tjelle <span class="foot-year"></span></div>
   </footer>
 </div>
 
@@ -1005,20 +1020,37 @@ footer{
 
 <script>
 let cur = 'home', lang = 'en';
+const pageTitles = {
+  home:      { en: 'Tjelle – Composer',      de: 'Tjelle – Komponist' },
+  comps:     { en: 'Compositions – Tjelle',  de: 'Werke – Tjelle' },
+  film:      { en: 'Film Music – Tjelle',    de: 'Filmmusik – Tjelle' },
+  about:     { en: 'About – Tjelle',         de: 'Über – Tjelle' },
+  contact:   { en: 'Contact – Tjelle',       de: 'Kontakt – Tjelle' },
+  impressum: { en: 'Impressum – Tjelle',     de: 'Impressum – Tjelle' },
+  privacy:   { en: 'Privacy – Tjelle',       de: 'Datenschutz – Tjelle' },
+};
 let activeBtn = null, timer = null;
 const pages = ['home','comps','film','about','contact','impressum','privacy'];
 
 function go(id, pushState = true) {
   if (!pages.includes(id)) id = 'home';
   if (id === cur) { window.scrollTo({top:0,behavior:'smooth'}); return; }
+  // Stop any playing audio when navigating away
+  if (activeBtn) stopPlay(activeBtn);
+
   const old = document.getElementById('page-'+cur);
   old.classList.remove('active');
   cur = id;
   const el = document.getElementById('page-'+id);
   el.classList.add('active');
   window.scrollTo({top:0,behavior:'instant'});
-  document.querySelectorAll('.nl').forEach(l => l.classList.toggle('on', l.dataset.p === id));
+  document.querySelectorAll('.nl').forEach(l => {
+    const active = l.dataset.p === id;
+    l.classList.toggle('on', active);
+    l.setAttribute('aria-current', active ? 'page' : 'false');
+  });
   updateNav();
+  document.title = (pageTitles[id] && pageTitles[id][lang]) || 'Tjelle – Composer';
   setTimeout(initSR, 100);
   if (pushState) history.pushState({page: id}, '', '#'+id);
 }
@@ -1035,30 +1067,40 @@ function updateNav() {
   nav.className = onHero ? 'over' : 'solid';
 }
 function toggleTheme() {
-  document.documentElement.dataset.theme =
-    document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = next;
+  localStorage.setItem('theme', next);
 }
 
 function setLang(l) {
   lang = l;
-  document.querySelectorAll('.lb').forEach(b  => b.classList.toggle('on', b.textContent.toLowerCase() === l));
-  document.querySelectorAll('.mm-lb').forEach(b => b.classList.toggle('on', b.textContent.toLowerCase() === l));
+  localStorage.setItem('lang', l);
+  document.documentElement.lang = l;
+  document.title = (pageTitles[cur] && pageTitles[cur][l]) || 'Tjelle – Composer';
+  document.querySelectorAll('.lb').forEach(b  => { const on = b.textContent.toLowerCase() === l; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
+  document.querySelectorAll('.mm-lb').forEach(b => { const on = b.textContent.toLowerCase() === l; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
   document.querySelectorAll('[data-en]').forEach(el => {
     const v = el.getAttribute('data-'+l);
-    if (v) el.innerHTML = v;
+    if (v) el.textContent = v;
   });
 }
 
 function openMob() {
-  document.getElementById('mmenu').classList.add('open');
+  const m = document.getElementById('mmenu');
+  m.classList.add('open');
+  m.setAttribute('aria-hidden', 'false');
   document.getElementById('mmenu-overlay').classList.add('open');
   document.querySelector('.hbg').classList.add('open');
+  document.querySelector('.hbg').setAttribute('aria-expanded', 'true');
   document.body.style.overflow = 'hidden';
 }
 function closeMob() {
-  document.getElementById('mmenu').classList.remove('open');
+  const m = document.getElementById('mmenu');
+  m.classList.remove('open');
+  m.setAttribute('aria-hidden', 'true');
   document.getElementById('mmenu-overlay').classList.remove('open');
   document.querySelector('.hbg').classList.remove('open');
+  document.querySelector('.hbg').setAttribute('aria-expanded', 'false');
   document.body.style.overflow = '';
 }
 function toggleMob() {
@@ -1137,12 +1179,14 @@ document.addEventListener('click', e => {
   audio.currentTime = pct * audio.duration;
 });
 
+const srObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); srObserver.unobserve(e.target); }});
+}, {threshold: 0.06});
+
 function initSR() {
-  const els = document.querySelectorAll('#page-'+cur+' .sr');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }});
-  }, {threshold: 0.06});
-  els.forEach(el => { if (!el.classList.contains('in')) obs.observe(el); });
+  document.querySelectorAll('#page-'+cur+' .sr').forEach(el => {
+    if (!el.classList.contains('in')) srObserver.observe(el);
+  });
 }
 
 // ── CMS DATA LOADER ──────────────────────────────────────────────────────────
@@ -1226,7 +1270,8 @@ async function loadCMS() {
       }
       // CV
       const cvLink = document.querySelector('.cv-link');
-      if (cvLink && a.cv) cvLink.href = a.cv;
+      if (cvLink && a.cv) { cvLink.href = a.cv; cvLink.style.display = ''; }
+      else if (cvLink) { cvLink.style.display = 'none'; }
     }
 
     // ── CONTACT ───────────────────────────────────────────────────────────────
@@ -1246,7 +1291,7 @@ async function loadCMS() {
         if (!socList[i]) return;
         const h = row.querySelector('.soc-handle');
         if (h) h.textContent = socList[i].value || '—';
-        if (socList[i].url !== '#') { row.style.cursor='pointer'; row.onclick = () => window.open(socList[i].url,'_blank'); }
+        if (socList[i].url !== '#') { row.style.cursor='pointer'; row.onclick = () => window.open(socList[i].url,'_blank','noopener,noreferrer'); }
       });
     }
 
@@ -1257,12 +1302,12 @@ async function loadCMS() {
       if (wrap && imp.name) {
         wrap.innerHTML = `
           <h2>Angaben gemäß § 5 TMG</h2>
-          <p>${imp.name}<br>${imp.street}<br>${imp.city}<br>${imp.country}</p>
+          <p>${esc(imp.name)}<br>${esc(imp.street)}<br>${esc(imp.city)}<br>${esc(imp.country)}</p>
           <h2>Kontakt</h2>
-          <p>E-Mail: <a href="mailto:${imp.email}">${imp.email}</a></p>
+          <p>E-Mail: <a href="mailto:${esc(imp.email)}">${esc(imp.email)}</a></p>
           <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
-          <p>${imp.name}<br>${imp.street}, ${imp.city}</p>
-          ${imp.extra ? `<h2>Weitere Angaben</h2><p>${imp.extra}</p>` : ''}
+          <p>${esc(imp.name)}<br>${esc(imp.street)}, ${esc(imp.city)}</p>
+          ${imp.extra ? `<h2>Weitere Angaben</h2><p>${esc(imp.extra)}</p>` : ''}
           <h2>Haftungsausschluss</h2>
           <p>Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte wird jedoch keine Gewähr übernommen. Als Diensteanbieter bin ich gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.</p>
         `;
@@ -1329,8 +1374,8 @@ async function loadCMS() {
               <div class="film-num">${String(i+1).padStart(2,'0')}</div>
               <h2 class="film-title" data-en="${esc(f.title_en)}" data-de="${esc(f.title_de)}">${lang==='de' ? f.title_de : f.title_en}</h2>
               <div class="film-meta">
-                ${lang==='de'?'Regie':'Director'}: ${f.director}<br>
-                ${lang==='de'?'Jahr':'Year'}: ${f.year} · <span data-en="${esc(f.genre_en)}" data-de="${esc(f.genre_de)}">${lang==='de' ? f.genre_de : f.genre_en}</span>
+                ${lang==='de'?'Regie':'Director'}: ${esc(f.director)}<br>
+                ${lang==='de'?'Jahr':'Year'}: ${esc(f.year)} · <span data-en="${esc(f.genre_en)}" data-de="${esc(f.genre_de)}">${lang==='de' ? f.genre_de : f.genre_en}</span>
               </div>
               ${(f.desc_en||f.desc_de) ? `<p class="film-desc" data-en="${esc(f.desc_en||'')}" data-de="${esc(f.desc_de||'')}">${lang==='de' ? (f.desc_de||f.desc_en) : (f.desc_en||f.desc_de)}</p>` : ''}
             </div>
@@ -1346,7 +1391,7 @@ async function loadCMS() {
 
 // Helper: escape HTML attribute values
 function esc(str) {
-  return (str||'').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return (str||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 // Helper: set data-en/de + visible text on an element by id
 function setField(id, en, de) {
@@ -1367,6 +1412,15 @@ if (window.netlifyIdentity) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Set copyright year
+  document.querySelectorAll('.foot-year').forEach(el => el.textContent = new Date().getFullYear());
+
+  // Restore persisted theme & language
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+  const savedLang = localStorage.getItem('lang');
+  if (savedLang && savedLang !== 'en') setLang(savedLang);
+
   const hash = location.hash.replace('#','');
   if (hash && pages.includes(hash)) {
     go(hash, false);
@@ -1414,6 +1468,10 @@ function runParallax() {
 }
 
 window.addEventListener('scroll', () => { updateNav(); runParallax(); }, {passive:true});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('mmenu').classList.contains('open')) closeMob();
+});
 </script>
 </body>
 </html>
