@@ -23,14 +23,14 @@
       "year": "2026"
     },
     {
-      "title_en": "fasdfasd",
-      "title_de": "dfasadfs",
-      "year": "sdfadfsadsfadsfa",
-      "instrumentation_en": "dsfasdfa",
-      "instrumentation_de": "asdf",
-      "duration": "adfsasdf",
-      "desc_en": "afsddfas",
-      "audio": "/images/distant-feedback.mp3"
+      "title_en": "Leerlauf",
+      "title_de": "Leerlauf",
+      "year": "2025",
+      "instrumentation_en": "for strings, woodwinds, piano and synthesizer",
+      "instrumentation_de": "für Streicher, Holzbläser, Klavier und Synthesizer",
+      "duration": "02:00",
+      "desc_en": "",
+      "audio": "/images/leerlauf.mp3"
     }
   ]
 }
