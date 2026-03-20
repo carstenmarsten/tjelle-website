@@ -13,12 +13,12 @@
     },
     {
       "title_de": "Sekundenwach",
-      "desc_de": "dfasafsdafsdfsda",
+      "desc_de": "",
       "title_en": "Sekundenwach",
       "instrumentation_de": "Für Saxophon, Schlagzeug und Klavier",
       "duration": "04:39",
-      "audio": "/images/distant-feedback.mp3",
-      "desc_en": "adsffds",
+      "audio": "/images/sekundenwach.mp3",
+      "desc_en": "",
       "instrumentation_en": "For Saxophon, Drums and Piano",
       "year": "2026"
     },
