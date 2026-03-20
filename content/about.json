@@ -4,12 +4,24 @@
   "bio2_en": "",
   "bio2_de": "",
   "tags": [
-    { "en": "Film Music",    "de": "Filmmusik" },
-    { "en": "Concert Music", "de": "Konzertmusik" },
-    { "en": "Chamber Music", "de": "Kammermusik" },
-    { "en": "Orchestra",     "de": "Orchester" }
+    {
+      "en": "Film Music",
+      "de": "Filmmusik"
+    },
+    {
+      "en": "Concert Music",
+      "de": "Konzertmusik"
+    },
+    {
+      "en": "Chamber Music",
+      "de": "Kammermusik"
+    },
+    {
+      "en": "Orchestra",
+      "de": "Orchester"
+    }
   ],
-  "portrait": "",
+  "portrait": "/images/portrait-1.jpg",
   "portrait_credit": "",
   "cv": ""
 }
