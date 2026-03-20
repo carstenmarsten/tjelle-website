@@ -1,21 +1,22 @@
 {
   "items": [
     {
-      "title_en": "Film Title",
-      "title_de": "Filmtitel",
-      "year": "2222",
-      "instrumentation_en": "blabla",
-      "instrumentation_de": "blabla",
-      "desc_en": "fasdjhfklsdajklgjklsagjklödsaf",
-      "desc_de": "gdsahgjsdfkljgfldkklöasgd",
-      "audio": "/images/distant-feedback.mp3"
+      "title_de": "Paradise",
+      "desc_de": "",
+      "title_en": "Paradise",
+      "instrumentation_de": "für erweiterte Streichersektion, sechs Hörner und Synthesizer",
+      "duration": "02:17",
+      "audio": "/images/paradise-soundtrack.mp3",
+      "desc_en": "",
+      "instrumentation_en": "for extended string section, six horns and synthesizer",
+      "year": "2026"
     },
     {
       "title_de": "Sekundenwach",
       "desc_de": "dfasafsdafsdfsda",
       "title_en": "Sekundenwach",
       "instrumentation_de": "Für Saxophon, Schlagzeug und Klavier",
-      "duration": "4:39",
+      "duration": "04:39",
       "audio": "/images/distant-feedback.mp3",
       "desc_en": "adsffds",
       "instrumentation_en": "For Saxophon, Drums and Piano",
